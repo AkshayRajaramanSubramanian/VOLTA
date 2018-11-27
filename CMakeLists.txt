@@ -218,9 +218,9 @@ if (CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)	
   add_rostest_gtest(
   ${PROJECT_NAME}_test
+  test/volta_test.test
   test/main.cpp
   test/voltaTest.cpp
-  test/volta_test.test
   )
   target_link_libraries(
   ${PROJECT_NAME}_test
