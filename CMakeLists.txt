@@ -13,6 +13,24 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+# Coveralls support
+option(ROS_CI_COVERALLS "Turn on coveralls support" OFF)
+option(ROS_CI_COVERALLS_UPLOAD "Upload the generated coveralls json" OFF)
+
+if($ENV{ROS_CI_COVERAGE})
+  set(CMAKE_BUILD_TYPE Debug)
+  set(ROS_CI_COVERALLS ON)
+  set(ROS_CI_COVERALLS_UPLOAD ON)
+endif()
+
+if(ROS_CI_COVERALLS)
+  include(Coveralls)
+  coveralls_turn_on_coverage()
+  message(STATUS "coveralls on")
+endif()
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -196,14 +214,28 @@ target_link_libraries(volta ${catkin_LIBRARIES})
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-if(CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  add_rostest_gtest(volta_test test/volta_test.test
-					    test/main.cpp 
-					    test/voltaTest.cpp)
-  target_link_libraries(volta_test 
-					    ${catkin_LIBRARIES})
-#  add_dependencies(volta_test
-#					    #beginner_tutorials_generate_messages_cpp
-#)
+if (CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)	
+  add_rostest_gtest(
+  ${PROJECT_NAME}_test
+  test/main.cpp
+  test/voltaTest.cpp
+  test/volta_test.test
+  )
+  target_link_libraries(
+  ${PROJECT_NAME}_test
+  ${catkin_LIBRARIES}
+  )
 endif()
+
+if (ROS_CI_COVERALLS)
+  set(COV_FILES)
+  file(GLOB_RECURSE SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+  list(APPEND COV_FILES ${SRCS})
+  file(GLOB_RECURSE HDRS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
+  list(APPEND COV_FILES ${HDRS})
+  coveralls_setup("${COV_FILES}" ${ROS_CI_COVERALLS_UPLOAD})
+endif()
+
+## Add folders to be run by python nosetests
+# catkin_add_nosetests(test)
