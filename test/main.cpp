@@ -42,7 +42,7 @@
  */
 int main(int argc, char** argv) {
   // Initializing ROS
-  ros::init(argc, argv, "talkerTest");
+  ros::init(argc, argv, "voltaTest");
   // Initializing google test framework
   ::testing::InitGoogleTest(&argc, argv);
   // Running all tests
