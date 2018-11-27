@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(volta)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -133,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/volta_node.cpp)
+add_executable(volta src/volta.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,9 +146,7 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(volta ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -197,3 +195,15 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(volta_test test/volta_test.test
+					    test/main.cpp 
+					    test/voltaTest.cpp)
+  target_link_libraries(volta_test 
+					    ${catkin_LIBRARIES})
+#  add_dependencies(volta_test
+#					    #beginner_tutorials_generate_messages_cpp
+#)
+endif()

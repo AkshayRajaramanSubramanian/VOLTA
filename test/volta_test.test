@@ -1,0 +1,14 @@
+<launch>
+    <arg name = "rate" default = "5" />
+    <node
+      name="volta"
+      pkg="volta"
+      type="volta"
+      args="$(arg rate)"
+    />
+    <test
+      test-name="voltaTest"
+      pkg="volta"
+      type="volta_test"
+    />
+</launch>
