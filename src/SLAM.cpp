@@ -31,7 +31,7 @@
  * SOFTWARE.
  */
 
-#include "SLAM.h"
+#include "../include/SLAM.h"
 
 SLAM::SLAM() {
 

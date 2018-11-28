@@ -31,7 +31,7 @@
  * SOFTWARE.
  */
 
-#include "ChargeDockDetection.h"
+#include "../include/ChargeDockDetection.h"
 
 ChargeDockDetection::ChargeDockDetection() {
 

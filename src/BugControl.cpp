@@ -31,7 +31,7 @@
  * SOFTWARE.
  */
 
-#include "BugControl.h"
+#include "../include/BugControl.h"
 
 BugControl::BugControl() {
 

@@ -31,7 +31,7 @@
  * SOFTWARE.
  */
 
-#include "CoordinatorClass.h"
+#include "../include/CoordinatorClass.h"
 
 CoordinatorClass::CoordinatorClass() {
 

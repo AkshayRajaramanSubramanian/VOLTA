@@ -31,7 +31,7 @@
  * SOFTWARE.
  */
 
-#include "ChargeDock.h"
+#include "../include/ChargeDock.h"
 
 ChargeDock::ChargeDock() {
 
