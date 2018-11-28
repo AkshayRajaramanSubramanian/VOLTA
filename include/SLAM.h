@@ -1,10 +1,10 @@
 /*
- * @file ChargeDock.h
+ * @file SLAM.cpp
  * @Copyright MIT license
  * Copyright (c) 2018 Bala Murali Manoghar Sai Sudhakar, Akshay Rajaraman
  * @author Bala Murali Manoghar Sai Sudhakar
  * @author Akshay Rajaraman
- * @brief header file for bug ChargeDock class.
+ * @brief Header file for SLAM class
  */
 
 /*
@@ -31,40 +31,41 @@
  * SOFTWARE.
  */
 
-#ifndef VOLTA_SRC_CHARGEDOCK_H_
-#define VOLTA_SRC_CHARGEDOCK_H_
+#ifndef VOLTA_SRC_SLAM_H_
+#define VOLTA_SRC_SLAM_H_
 
-#include <vector>
-
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
-#include "BugAlgorithm.h"
-
-/**
- * @brief Holds all charge dock coordinates with respect to map frame
- */
-class ChargeDock {
+class SLAM {
  public:
-  // <!Contains all charging dock coordinates
-  std::vector<point> chargeDocks;
   /**
-   * @brief returns the charging dock information on request
+   * @brief Get images captured by robot
    * @param None
    * @return None
    */
-  void returnChargeDocks();
+  void getTurtlebotImages();
   /**
-   * @brief Constructor for the class
+   * @brief Publish images to SLAM package
    * @param None
    * @return None
    */
-  ChargeDock();
+  void publishImage();
   /**
-   * @brief Destructor for the class
+   * @brief Convert images captured by robot to format acceptable by SLAM package
    * @param None
    * @return None
    */
-  virtual ~ChargeDock();
+  void convertImageFormat();
+  /**
+   * @brief Constructor for class
+   * @param None
+   * @return None
+   */
+  SLAM();
+  /**
+   * @brief Destructor for class
+   * @param None
+   * @return None
+   */
+  virtual ~SLAM();
 };
 
-#endif /* VOLTA_SRC_CHARGEDOCK_H_ */
+#endif /* VOLTA_SRC_SLAM_H_ */

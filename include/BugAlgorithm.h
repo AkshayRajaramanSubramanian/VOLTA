@@ -34,31 +34,61 @@
 #ifndef VOLTA_SRC_BUGALGORITHM_H_
 #define VOLTA_SRC_BUGALGORITHM_H_
 
-
 #include <vector>
 
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 
+/**
+ * @brief Structure to hold 2D point
+ */
 struct point {
-  int x;
-  int y;
+  int x;  // !<X co-ordinate of point
+  int y;  // !<Y co-ordinate of point
 };
 
-struct pathAttribute{
-  geometry_msgs::Twist twist;
-  double duration;
+/**
+ * @brief Structure to hold attributes of path which are twist and duration
+ */
+
+struct pathAttribute {
+  geometry_msgs::Twist twist;  // !<Velocity and Orientation of robot
+  double duration;  // !<Duration for which robot has to travel in specified velocity
 };
 
-
+/**
+ * @brief BugAlgorithm class generates the path that
+ * robot has to traverse for generating SLAM
+ */
 class BugAlgorithm {
  public:
+  // !<Velocity and duration for which robot will move closed path
   std::vector<pathAttribute> closedPath;
+  // !<Boundary for slam
   std::vector<point> boundary;
-
+  /**
+   * @brief Generate closed path for robot
+   * @param None
+   * @return None
+   */
   void generatePathPoints();
+  /**
+   * @brief Publish the path to control topic
+   * @param None
+   * @return None
+   */
   void publishPath();
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
   BugAlgorithm();
+  /**
+   * @brief Destructor for class
+   * @param None
+   * @return None
+   */
   virtual ~BugAlgorithm();
 };
 

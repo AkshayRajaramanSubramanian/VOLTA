@@ -34,11 +34,34 @@
 #ifndef VOLTA_SRC_COORDINATORCLASS_H_
 #define VOLTA_SRC_COORDINATORCLASS_H_
 
+/**
+ * @brief Class triggers training module and SLAM process
+ */
 class CoordinatorClass {
  public:
+  /**
+   * @brief Trigger training module for charge dock detection
+   * @param None
+   * @return None
+   */
   void startTraining();
+  /**
+   * @brief Trigger SLAM process
+   * @param None
+   * @return None
+   */
   void startSlam();
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
   CoordinatorClass();
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
   virtual ~CoordinatorClass();
 };
 

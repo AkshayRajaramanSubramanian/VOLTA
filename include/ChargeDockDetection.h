@@ -4,7 +4,7 @@
  * Copyright (c) 2018 Bala Murali Manoghar Sai Sudhakar, Akshay Rajaraman
  * @author Bala Murali Manoghar Sai Sudhakar
  * @author Akshay Rajaraman
- * @brief header file for bug ChargeDockDetection class.
+ * @brief Header file for bug ChargeDockDetection class.
  */
 
 /*
@@ -36,15 +36,48 @@
 
 #include "BugAlgorithm.h"
 
+/**
+ * @brief Class runs image processing on captured images to detect charging dock
+ */
 class ChargeDockDetection {
  public:
+  // <!Coordinates of charging dock
   point chargeMarker;
-
+  /**
+   * @brief Publish charge dock coordinates to chargeDock topic
+   * @param None
+   * @return None
+   */
   void publishChargerDocPos();
+  /**
+   * @brief Image processing algorithm to find presence of charging dock
+   * @param None
+   * @return None
+   */
   void checkForChargeDock();
+  /**
+   * @brief Calculate charging dock coordinates with respect to map frame
+   * @param None
+   * @return None
+   */
   void findChargePosition();
+  /**
+   * @brief Training module for charge dock detection algorithm
+   * @param None
+   * @return None
+   */
   void svmTrainer();
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
   ChargeDockDetection();
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
   virtual ~ChargeDockDetection();
 };
 
