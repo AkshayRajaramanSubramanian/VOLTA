@@ -34,6 +34,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   rostest
+  geometry_msgs
+  sensor_msgs
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
