@@ -17,6 +17,11 @@ The packages will be developed with Test Driven Development, Pair programming an
 agile development strategies to ensure accurate intended operation of the robot.
 The software development process can be subdivided into four tasks: Charging station
 
+## Authors
+
+Bala Murali Manoghar Sai Sudhakar
+Akahay Rajaraman
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bsaisudh/VOLTA/blob/master/LICENSE) file for details
