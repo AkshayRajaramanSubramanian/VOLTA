@@ -33,6 +33,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  rostest
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -173,7 +174,14 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(volta src/volta.cpp)
+add_executable(volta 
+		src/volta.cpp
+		src/BugAlgorithm.cpp
+		src/BugControl.cpp
+		src/ChargeDock.cpp
+		src/ChargeDockDetection.cpp
+		src/CoordinatorClass.cpp
+		src/SLAM.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
