@@ -1,10 +1,10 @@
 /*
- * @file BufAlgorithm.cpp
+ * @file BugAlgorithm.cpp
  * @Copyright MIT license
  * Copyright (c) 2018 Bala Murali Manoghar Sai Sudhakar, Akshay Rajaraman
  * @author Bala Murali Manoghar Sai Sudhakar
  * @author Akshay Rajaraman
- * @brief This demonstrates volta robot.
+ * @brief Class takes care of generating the path to be traversed during SLAM.
  */
 
 /*
