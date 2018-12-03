@@ -34,15 +34,35 @@
 #ifndef VOLTA_SRC_CHARGEDOCKDETECTION_H_
 #define VOLTA_SRC_CHARGEDOCKDETECTION_H_
 
+#include <vector>
+#include <string>
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+#include "opencv-3.3.1-dev/opencv2/imgproc/imgproc.hpp"
+#include "opencv-3.3.1-dev/opencv2/highgui/highgui.hpp"
+#include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
+#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
+#include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
+
 #include "BugAlgorithm.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
  */
 class ChargeDockDetection {
+ private:
+    ros::NodeHandle nh;
+    image_transport::ImageTransport it;
+    image_transport::Subscriber imageSub;
+    image_transport::Publisher imagePub;
+    const std::string OPENCV_WINDOW = "chargedock";
+    const std::string CHK_WINDOW = "checkerimg";
  public:
   // <!Coordinates of charging dock
   point chargeMarker;
+
   /**
    * @brief Publish charge dock coordinates to chargeDock topic
    * @param None
@@ -54,7 +74,7 @@ class ChargeDockDetection {
    * @param None
    * @return None
    */
-  void checkForChargeDock();
+  void checkForChargeDock(const sensor_msgs::ImageConstPtr& msg);
   /**
    * @brief Calculate charging dock coordinates with respect to map frame
    * @param None
@@ -68,11 +88,17 @@ class ChargeDockDetection {
    */
   void svmTrainer();
   /**
+   * @brief Image detection algorithm for checker board
+   * @param None
+   * @return None
+   */
+  void checkerBoardDetect(cv_bridge::CvImagePtr cvPtr);
+  /**
    * @brief Constructor for the class
    * @param None
    * @return None
    */
-  ChargeDockDetection();
+  ChargeDockDetection(ros::NodeHandle _nh);
   /**
    * @brief Destructor for the class
    * @param None
