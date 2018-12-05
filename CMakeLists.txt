@@ -36,7 +36,6 @@ find_package(catkin REQUIRED COMPONENTS
   rostest
   geometry_msgs
   sensor_msgs
-  nav_msgs
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
