@@ -178,8 +178,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(volta 
 		src/volta.cpp
-		src/BugAlgorithm.cpp
-		src/BugControl.cpp
+		src/Explore.cpp
 		src/ChargeDock.cpp
 		src/ChargeDockDetection.cpp
 		src/CoordinatorClass.cpp
