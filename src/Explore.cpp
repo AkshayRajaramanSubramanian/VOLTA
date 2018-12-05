@@ -7,8 +7,6 @@
  *
  */
 
-
-
 /*
  * MIT License
  *
