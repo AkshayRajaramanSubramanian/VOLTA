@@ -32,7 +32,7 @@
  */
 
 #include "ros/ros.h"
-
+#include "../include/Explore.h"
 /**
  * @brief Main block that runs the node.
  * @param argc Number of command line arguments
