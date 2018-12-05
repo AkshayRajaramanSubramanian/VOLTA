@@ -34,7 +34,7 @@
 #ifndef VOLTA_SRC_CHARGEDOCKDETECTION_H_
 #define VOLTA_SRC_CHARGEDOCKDETECTION_H_
 
-#include "BugAlgorithm.h"
+#include "Explore.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
