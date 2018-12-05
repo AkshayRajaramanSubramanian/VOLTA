@@ -38,7 +38,7 @@
 
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
-#include "BugAlgorithm.h"
+#include "Explore.h"
 
 /**
  * @brief Holds all charge dock coordinates with respect to map frame
