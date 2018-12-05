@@ -42,5 +42,8 @@
 int main(int argc, char **argv) {
   // Initializing ROS
   ros::init(argc, argv, "volta");
+  ros::NodeHandle n;
+  Explore explore(n);
+  ros::spin();
   return 0;
 }
