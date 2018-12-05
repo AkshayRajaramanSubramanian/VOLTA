@@ -33,7 +33,7 @@
  * SOFTWARE.
  */
 
-#include "../include/VOLTA/Explore.h"
+#include "../include/Explore.h"
 #include <math.h>
 #include "geometry_msgs/Twist.h"
 #include "sensor_msgs/LaserScan.h"
