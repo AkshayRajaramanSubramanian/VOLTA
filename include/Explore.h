@@ -6,7 +6,6 @@
  * @brief class desciption for the Explore implementation
  *
  */
-
 /*
  * MIT License
  *
