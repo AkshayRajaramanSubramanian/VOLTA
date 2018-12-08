@@ -253,6 +253,7 @@ if (CATKIN_ENABLE_TESTING)
   test/volta_test.test
   test/main.cpp
   test/voltaTest.cpp
+  test/ExploreTest.cpp
   )
   target_link_libraries(
   ${PROJECT_NAME}_test
