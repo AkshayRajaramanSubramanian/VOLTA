@@ -4,6 +4,7 @@
  *  Created on: Dec 5, 2018
  *      Author: bala
  */
+#include <ros/console.h>
 
 #include "../include/Explore.h"
 
@@ -23,7 +24,6 @@
 #include <cmath>
 #include <algorithm>
 #include <stack>
-
 
 TEST(robot_move, stop) {
   // Assert
@@ -65,7 +65,7 @@ TEST(robot_move, trun_left) {
   // Act
   ex.robot_move(TURN_LEFT);
   // Test
-  EXPECT_DOUBLE_EQ(0.1, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(1.0, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
 }
 
@@ -100,27 +100,67 @@ TEST(robot_move, go_left) {
   // Test
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.linear.x);
+
+  ROS_DEBUG("Hello %s", "World");
+  ROS_DEBUG_STREAM("Hello " << "World");
+  ROS_INFO_STREAM("tatasdfsdfasdfasdfasdf");
+  std::cout << "cout working";
 }
-
-
-void callbackMotorCommand(geometry_msgs::Twist &motor_command){
+/*
+void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
 
 }
+*/
+/*
+ TEST(test_1,test) {
+ bool callback;
+ ros::Subscriber sub;
+ ros::NodeHandle nh;
+ callback = false;
+ sub = nh.subscribe("/mobile_base/commands/velocity", 10,
+ &callbackMotorCommand);
+ }
+ */
 
-TEST(robot_move, publish) {
-  // listen topic and check
+class ExploreTest {
+ public:
 
-  // Assert
-  ros::NodeHandle n;
-  ros::Subscriber sub = n.subscribe("/mobile_base/commands/velocity",
-                                    10, &callbackMotorCommand);
-  ASSERT_EQ(1, sub.getNumPublishers());
-  // Check for call back
+  ros::Subscriber sub;
+  bool callback;
+  ros::NodeHandle nh;
 
+  void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
+    callback = true;
+    std::cout << "Call Back called";
+  }
+
+  ExploreTest() {
+    callback = false;
+    sub = nh.subscribe("/mobile_base/commands/velocity", 10,
+                       &ExploreTest::callbackMotorCommand, this);
+  }
+
+  ~ExploreTest() {
+  }
+
+};
+
+TEST(ExploreTest, publishers) {
+  ExploreTest t;
+  Explore ex(t.nh);
+  ex.robot_move(GO_LEFT);
+  ros::Duration(2.0).sleep();
+  ASSERT_STREQ("/mobile_base/commands/velocity", t.sub.getTopic().c_str());
+  ASSERT_GE(2,t.sub.getNumPublishers());
   ros::spinOnce();
+}
 
-  // Act
-
-  // Test
+TEST(ExploreTest, message) {
+  ExploreTest t;
+  Explore ex(t.nh);
+  ex.robot_move(GO_LEFT);
+  ros::Duration(2.0).sleep();
+  ros::spinOnce();
+  ASSERT_TRUE(t.callback);
 }
 
