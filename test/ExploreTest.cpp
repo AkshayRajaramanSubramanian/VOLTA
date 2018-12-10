@@ -168,7 +168,7 @@ TEST(ExploreTest, messageExist) {
   ExploreTest t;
   Explore ex(t.nh);
   ex.robot_move(GO_LEFT);
-  ros::Duration(2.0).sleep();
+  ros::Duration(0.5).sleep();
   ros::spinOnce();
   ASSERT_TRUE(t.mcallback);
 }
@@ -177,13 +177,13 @@ TEST(ExploreTest, messageValue) {
   ExploreTest t;
   Explore ex(t.nh);
   ex.robot_move(GO_RIGHT);
-  ros::Duration(2.0).sleep();
+  ros::Duration(0.5).sleep();
   ros::spinOnce();
   EXPECT_DOUBLE_EQ(-0.25, t.mCmd.angular.z);
   EXPECT_DOUBLE_EQ(0.25, t.mCmd.linear.x);
 }
 
-TEST(ExploreTest, laserCallbackTest) {
+TEST(ExploreTest, backward) {
   sensor_msgs::LaserScan laserMsg;
   std::vector<float> range;
   range.push_back(NAN);
@@ -198,8 +198,93 @@ TEST(ExploreTest, laserCallbackTest) {
   Explore ex(t.nh);
   t.createLaserPublisher();
   t.lpub.publish(laserMsg);
-  ros::Duration(2.0).sleep();
+  ros::Duration(0.5).sleep();
   ros::spinOnce();
   EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(-0.75, ex.motor_command.linear.x);
 }
+
+TEST(ExploreTest, forward) {
+  sensor_msgs::LaserScan laserMsg;
+  std::vector<float> range;
+  range.push_back(4.0);
+  range.push_back(4.0);
+  range.push_back(4.0);
+  range.push_back(4.0);
+  laserMsg.ranges = range;
+  laserMsg.range_max = 10.0;
+  laserMsg.range_min = 0.449999988079;
+
+  ExploreTest t;
+  Explore ex(t.nh);
+  t.createLaserPublisher();
+  t.lpub.publish(laserMsg);
+  ros::Duration(0.5).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(0.5, ex.motor_command.linear.x);
+}
+
+TEST(ExploreTest, turnLeft) {
+  sensor_msgs::LaserScan laserMsg;
+  std::vector<float> range;
+  range.push_back(6.0);
+  range.push_back(6.0);
+  range.push_back(0.4);
+  range.push_back(0.4);
+  laserMsg.ranges = range;
+  laserMsg.range_max = 10.0;
+  laserMsg.range_min = 0.449999988079;
+
+  ExploreTest t;
+  Explore ex(t.nh);
+  t.createLaserPublisher();
+  t.lpub.publish(laserMsg);
+  ros::Duration(0.5).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(1.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+}
+
+TEST(ExploreTest, turnRight) {
+  sensor_msgs::LaserScan laserMsg;
+  std::vector<float> range;
+  range.push_back(0.4);
+  range.push_back(0.4);
+  range.push_back(0.4);
+  range.push_back(6.0);
+  laserMsg.ranges = range;
+  laserMsg.range_max = 10.0;
+  laserMsg.range_min = 0.449999988079;
+
+  ExploreTest t;
+  Explore ex(t.nh);
+  t.createLaserPublisher();
+  t.lpub.publish(laserMsg);
+  ros::Duration(0.5).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(-1.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+}
+/*
+TEST(ExploreTest, goRight) {
+  sensor_msgs::LaserScan laserMsg;
+  std::vector<float> range;
+  range.push_back(0.4);
+  range.push_back(0.4);
+  range.push_back(0.4);
+  range.push_back(6.0);
+  laserMsg.ranges = range;
+  laserMsg.range_max = 10.0;
+  laserMsg.range_min = 0.449999988079;
+
+  ExploreTest t;
+  Explore ex(t.nh);
+  t.createLaserPublisher();
+  t.lpub.publish(laserMsg);
+  ros::Duration(1.0).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(-1.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+}
+*/
