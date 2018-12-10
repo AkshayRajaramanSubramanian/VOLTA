@@ -54,16 +54,12 @@ ChargeDock::ChargeDock(ros::NodeHandle &_nh)
 
 bool ChargeDock::ballParkCheck(cv::Point3f point) {
 
-  float deltaX = 5;
-  float deltaY = 5;
-  float deltaZ = 5;
-
   bool inside = false;
 
   for (auto &i : centers) {
-    inside |= ((point.x < i.x + deltaX && point.x > i.x - deltaX)
-        && (point.y < i.y + deltaY && point.y > i.x - deltaY)
-        && (point.z < i.z + deltaZ && point.x > i.x - deltaZ));
+    float r = (point.x - i.x)*(point.x - i.x) + (point.y - i.y)*(point.y - i.y);
+    inside |= (r < 10);
+    ROS_INFO_STREAM("cx: "<< i.x << " cy: " << i.y << " cz: " << i.z << " r" << r );
   }
   return inside;
 }
@@ -73,6 +69,7 @@ void ChargeDock::placeChargeDock(float x, float y, float z) {
   center.x = x;
   center.y = y;
   center.z = z;
+  ROS_INFO_STREAM("gx: "<< x << " gy: " << y << " gz: " << z << std::endl);
   if (!ballParkCheck(center)) {
     visualization_msgs::Marker points;
     points.header.frame_id = "/odom";
@@ -86,8 +83,9 @@ void ChargeDock::placeChargeDock(float x, float y, float z) {
     points.type = visualization_msgs::Marker::POINTS;
 
     // POINTS markers use x and y scale for width/height respectively
-    points.scale.x = 0.2;
-    points.scale.y = 0.2;
+    points.scale.x = 1;
+    points.scale.y = 1;
+    points.scale.z = 0.1;
 
     // Points are green
     points.color.g = 1.0;
@@ -97,11 +95,11 @@ void ChargeDock::placeChargeDock(float x, float y, float z) {
     p.x = x;
     p.y = y;
     p.z = z;
-
     points.points.push_back(p);
-
-    markerPub.publish(points);
     ROS_INFO_STREAM("Marker placed with id : " << id);
+    ROS_INFO_STREAM("x: "<< x << " y: " << y << " z: " << z << std::endl);
+    p.z = 0.0;
+    markerPub.publish(points);
     id += 1;
     centers.push_back(center);
   }

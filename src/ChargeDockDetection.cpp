@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <string>
+#include <cmath>
 #include "../include/ChargeDockDetection.h"
 #include "../include/ChargeDock.h"
 #include "ros/ros.h"
@@ -67,13 +68,13 @@ cv::Point2f ChargeDockDetection::centroid(std::vector<cv::Point2f> points) {
   return center;
 }
 
-void ChargeDockDetection::broadcastTf(float X, float Y, float Z) {
+void ChargeDockDetection::broadcastTf(float x, float y, float z) {
   // Initializing a broadcast for transform frame
   static tf::TransformBroadcaster br;
   // Create transform variable
   tf::Transform tr;
   // Set origin of transformation
-  tr.setOrigin(tf::Vector3(X, Y, Z));
+  tr.setOrigin(tf::Vector3(x, y, z));
   // Initialize quaternion for rotation
   tf::Quaternion q;
   // Set zero rotation
@@ -115,9 +116,9 @@ void ChargeDockDetection::broadcastTf(float X, float Y, float Z) {
   float Ty = transform.getOrigin().y();
   float Tz = transform.getOrigin().z();
 
-  float wX = r11 * X + r12 * Y + r13 * Z + Tx;
-  float wY = r21 * X + r22 * Y + r23 * Z + Ty;
-  float wZ = r31 * X + r32 * Y + r33 * Z + Tz;
+  float wX = r11 * x + r12 * y + r13 * z + Tx;
+  float wY = r21 * x + r22 * y + r23 * z + Ty;
+  float wZ = r31 * z + r32 * y + r33 * z + Tz;
 
   // Broadcast calculated point with respect to odom
   tr.setOrigin(tf::Vector3(wX, wY, wZ));
@@ -125,7 +126,8 @@ void ChargeDockDetection::broadcastTf(float X, float Y, float Z) {
   tr.setRotation(q);
   br.sendTransform(tf::StampedTransform(tr, ros::Time::now(), "odom", "volta"));
 
-  ROS_INFO_STREAM("X: "<< wX << "Y: " << wY << "Z: " << wZ);
+  //ROS_INFO_STREAM("x: "<< x << " y: " << y << " z: " << z);
+  //ROS_INFO_STREAM("X: "<< wX << " Y: " << wY << " Z: " << wZ);
   dock.placeChargeDock(wX, wY, wZ);
 }
 
@@ -143,21 +145,26 @@ void ChargeDockDetection::getXYZ(int x, int y) {
   int arrayPosY = arrayPosition + my_pcl.fields[1].offset;  // Y has an offset of 4
   int arrayPosZ = arrayPosition + my_pcl.fields[2].offset;  // Z has an offset of 8
   // X, Y, Z points calculated from RGBD
-  float X;
-  float Y;
-  float Z;
+  float depthX;
+  float depthY;
+  float depthZ;
 
-  memcpy(&X, &my_pcl.data[arrayPosX], sizeof(float));
-  memcpy(&Y, &my_pcl.data[arrayPosY], sizeof(float));
-  memcpy(&Z, &my_pcl.data[arrayPosZ], sizeof(float));
+  memcpy(&depthX, &my_pcl.data[arrayPosX], sizeof(float));
+  memcpy(&depthY, &my_pcl.data[arrayPosY], sizeof(float));
+  memcpy(&depthZ, &my_pcl.data[arrayPosZ], sizeof(float));
 
-  geometry_msgs::Point p;
-  // put data into the point p
-  p.x = X;
-  p.y = Y;
-  p.z = Z;
   // Convert to odom coordinates and publish
-  broadcastTf(X, Y, Z);
+  if (!(std::isnan(depthX) || std::isnan(depthY) || std::isnan(depthZ))) {
+    broadcastTf(depthX, depthY, depthZ);
+  }
+
+  /*
+   geometry_msgs::Point p;
+   // put data into the point p
+   p.x = depthX;
+   p.y = depthY;
+   p.z = depthZ;
+   */
 }
 
 ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
