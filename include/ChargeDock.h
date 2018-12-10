@@ -38,6 +38,7 @@
 
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
+#include "opencv-3.3.1-dev/opencv2/core/types.hpp"
 
 #include "visualization_msgs/Marker.h"
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
@@ -50,13 +51,20 @@ class ChargeDock {
   ros::NodeHandle n;
   ros::Publisher markerPub;
   int id = 0;
+  std::vector<cv::Point3f> centers;
  public:
   /**
    * @brief returns the charging dock information on request
-   * @param None
+   * @param x,y,z Points that has to be marked
    * @return None
    */
   void placeChargeDock(float x, float y, float z);
+  /**
+   * @brief returns the charging dock information on request
+   * @param point Point to be vhecked for ball park
+   * @return None
+   */
+  bool ballParkCheck(cv::Point3f point);
   /**
    * @brief Constructor for the class
    * @param None
