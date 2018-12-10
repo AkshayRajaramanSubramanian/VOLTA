@@ -38,27 +38,31 @@
 
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
-#include "BugAlgorithm.h"
+
+#include "visualization_msgs/Marker.h"
+#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
+#include "opencv-3.3.1-dev/opencv2/core/types.hpp"
 
 /**
  * @brief Holds all charge dock coordinates with respect to map frame
  */
 class ChargeDock {
+  ros::NodeHandle n;
+  ros::Publisher markerPub;
+  int id = 0;
  public:
-  // <!Contains all charging dock coordinates
-  std::vector<point> chargeDocks;
   /**
    * @brief returns the charging dock information on request
    * @param None
    * @return None
    */
-  void returnChargeDocks();
+  void placeChargeDock(float x, float y, float z);
   /**
    * @brief Constructor for the class
    * @param None
    * @return None
    */
-  ChargeDock();
+  ChargeDock(ros::NodeHandle &_nh);
   /**
    * @brief Destructor for the class
    * @param None

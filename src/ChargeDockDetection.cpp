@@ -34,6 +34,7 @@
 #include <vector>
 #include <string>
 #include "../include/ChargeDockDetection.h"
+#include "../include/ChargeDock.h"
 #include "ros/ros.h"
 #include "image_transport/image_transport.h"
 #include "cv_bridge/cv_bridge.h"
@@ -54,7 +55,19 @@
 #include "tf/transform_listener.h"
 #include "tf/transform_datatypes.h"
 
-void broadcastTf(float X, float Y, float Z) {
+cv::Point2f ChargeDockDetection::centroid(std::vector<cv::Point2f> points) {
+  int xSum = 0;
+  int ySum = 0;
+  for (auto &i : points) {
+    xSum += i.x;
+    ySum += i.y;
+  }
+  center.x = xSum / points.size();
+  center.y = ySum / points.size();
+  return center;
+}
+
+void ChargeDockDetection::broadcastTf(float X, float Y, float Z) {
   // Initializing a broadcast for transform frame
   static tf::TransformBroadcaster br;
   // Create transform variable
@@ -113,6 +126,7 @@ void broadcastTf(float X, float Y, float Z) {
   br.sendTransform(tf::StampedTransform(tr, ros::Time::now(), "odom", "volta"));
 
   ROS_INFO_STREAM("X: "<< wX << "Y: " << wY << "Z: " << wZ);
+  dock.placeChargeDock(wX, wY, wZ);
 }
 
 void ChargeDockDetection::depthcallback(
@@ -148,7 +162,8 @@ void ChargeDockDetection::getXYZ(int x, int y) {
 
 ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
     : nh(_nh),
-      it(_nh) {
+      it(_nh),
+      dock(_nh) {
   // Subbscribe to Raw image
   imageSub = it.subscribe("/camera/rgb/image_raw", 1,
                           &ChargeDockDetection::checkForChargeDock, this);
@@ -204,7 +219,8 @@ void ChargeDockDetection::checkerBoardDetect(cv_bridge::CvImagePtr cvPtr) {
    */
   if (corners.size() > 30) {
     if (hasNewPcl) {
-      getXYZ(corners[0].x, corners[0].y);
+      center = centroid(corners);
+      getXYZ(center.x, center.y);
       hasNewPcl = false;
     }
   } else {

@@ -48,6 +48,7 @@
 #include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
+#include "ChargeDock.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
@@ -77,6 +78,8 @@ class ChargeDockDetection {
   ros::Subscriber dep;
   // <!Coordinates of charging dock
   point chargeMarker;
+  cv::Point2f center;
+  ChargeDock dock;
  public:
 
   /**
@@ -121,6 +124,18 @@ class ChargeDockDetection {
    * @return None
    */
   void getXYZ(int x, int y);
+  /**
+   * @brief Places markers for charging docks in rviz environment
+   * @param points Points for which centroid has to be calculated
+   * @return None
+   */
+  cv::Point2f centroid(std::vector<cv::Point2f> points);
+  /**
+   * @brief Places markers for charging docks in rviz environment
+   * @param z,y,z Point for which transformation form odom has to be found
+   * @return None
+   */
+  void broadcastTf(float x, float y, float z);
   /**
    * @brief Constructor for the class
    * @param nh Node handle
