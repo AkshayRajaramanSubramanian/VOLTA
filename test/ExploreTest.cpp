@@ -100,11 +100,6 @@ TEST(robot_move, go_left) {
   // Test
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.linear.x);
-
-  ROS_DEBUG("Hello %s", "World");
-  ROS_DEBUG_STREAM("Hello " << "World");
-  ROS_INFO_STREAM("tatasdfsdfasdfasdfasdf");
-  std::cout << "cout working";
 }
 /*
 void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
@@ -124,20 +119,34 @@ void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
 
 class ExploreTest {
  public:
-
-  ros::Subscriber sub;
-  bool callback;
+  ros::Subscriber msub, lsub;
+  ros::Publisher lpub;
+  bool mcallback, lcallback;
   ros::NodeHandle nh;
+  geometry_msgs::Twist mCmd;
+  sensor_msgs::LaserScan laserMsg;
 
-  void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
-    callback = true;
-    std::cout << "Call Back called";
+  void callbackMotorCommand(const geometry_msgs::Twist &motorCommand) {
+    mcallback = true;
+    mCmd = motorCommand;
+  }
+
+  void getLaserData( const sensor_msgs::LaserScan::ConstPtr &scanMsg ){
+    lcallback = true;
+    laserMsg = *scanMsg;
+  }
+
+  void createLaserPublisher(){
+    lpub = nh.advertise<sensor_msgs::LaserScan>("/scan", 10);
   }
 
   ExploreTest() {
-    callback = false;
-    sub = nh.subscribe("/mobile_base/commands/velocity", 10,
+    mcallback = false;
+    lcallback = false;
+    msub = nh.subscribe("/mobile_base/commands/velocity", 10,
                        &ExploreTest::callbackMotorCommand, this);
+    //lsub = nh.subscribe("/scan", 10,
+    //                       &ExploreTest::getLaserData, this);
   }
 
   ~ExploreTest() {
@@ -150,17 +159,47 @@ TEST(ExploreTest, publishers) {
   Explore ex(t.nh);
   ex.robot_move(GO_LEFT);
   ros::Duration(2.0).sleep();
-  ASSERT_STREQ("/mobile_base/commands/velocity", t.sub.getTopic().c_str());
-  ASSERT_GE(2,t.sub.getNumPublishers());
+  ASSERT_STREQ("/mobile_base/commands/velocity", t.msub.getTopic().c_str());
+  ASSERT_GE(2,t.msub.getNumPublishers());
   ros::spinOnce();
 }
 
-TEST(ExploreTest, message) {
+TEST(ExploreTest, messageExist) {
   ExploreTest t;
   Explore ex(t.nh);
   ex.robot_move(GO_LEFT);
   ros::Duration(2.0).sleep();
   ros::spinOnce();
-  ASSERT_TRUE(t.callback);
+  ASSERT_TRUE(t.mcallback);
 }
 
+TEST(ExploreTest, messageValue) {
+  ExploreTest t;
+  Explore ex(t.nh);
+  ex.robot_move(GO_RIGHT);
+  ros::Duration(2.0).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(-0.25, t.mCmd.angular.z);
+  EXPECT_DOUBLE_EQ(0.25, t.mCmd.linear.x);
+}
+
+TEST(ExploreTest, laserCallbackTest) {
+  sensor_msgs::LaserScan laserMsg;
+  std::vector<float> range;
+  range.push_back(NAN);
+  range.push_back(NAN);
+  range.push_back(NAN);
+  range.push_back(NAN);
+  laserMsg.ranges = range;
+  laserMsg.range_max = 10.0;
+  laserMsg.range_min = 0.449999988079;
+
+  ExploreTest t;
+  Explore ex(t.nh);
+  t.createLaserPublisher();
+  t.lpub.publish(laserMsg);
+  ros::Duration(2.0).sleep();
+  ros::spinOnce();
+  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(-0.75, ex.motor_command.linear.x);
+}
