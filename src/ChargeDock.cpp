@@ -31,14 +31,8 @@
  * SOFTWARE.
  */
 
-#include "../include/ChargeDock.h"
-
 #include <vector>
-
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
-#include "visualization_msgs/Marker.h"
-
+#include "../include/ChargeDock.h"
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "visualization_msgs/Marker.h"
@@ -55,31 +49,31 @@ ChargeDock::ChargeDock(ros::NodeHandle &_nh)
 bool ChargeDock::ballParkCheck(cv::Point3f point) {
 
   bool inside = false;
-
+  // <! Check if the point received is inside the
   for (auto &i : centers) {
     float r = (point.x - i.x)*(point.x - i.x) + (point.y - i.y)*(point.y - i.y);
-    inside |= (r < 10);
-    ROS_INFO_STREAM("cx: "<< i.x << " cy: " << i.y << " cz: " << i.z << " r" << r );
+    inside |= (r < 10);   // Using ball bark number radius  = sqrt(10)
+    ROS_DEBUG_STREAM("cx: "<< i.x << " cy: " << i.y << " cz: " << i.z << " r" << r );
   }
   return inside;
 }
 
 void ChargeDock::placeChargeDock(float x, float y, float z) {
+  // <! Point structure to store the point
   cv::Point3f center;
   center.x = x;
   center.y = y;
   center.z = z;
-  ROS_INFO_STREAM("gx: "<< x << " gy: " << y << " gz: " << z << std::endl);
+  ROS_DEBUG_STREAM("rx: "<< x << " ry: " << y << " rz: " << z);
   if (!ballParkCheck(center)) {
+    // <! Building point data to display in RVIZ
     visualization_msgs::Marker points;
     points.header.frame_id = "/odom";
     points.header.stamp = ros::Time::now();
     points.ns = "chargeDock";
     points.action = visualization_msgs::Marker::ADD;
     points.pose.orientation.w = 1.0;
-
     points.id = id;
-
     points.type = visualization_msgs::Marker::POINTS;
 
     // POINTS markers use x and y scale for width/height respectively
@@ -91,15 +85,22 @@ void ChargeDock::placeChargeDock(float x, float y, float z) {
     points.color.g = 1.0;
     points.color.a = 1.0;
 
+    // Point to be matked
     geometry_msgs::Point p;
     p.x = x;
     p.y = y;
     p.z = z;
-    points.points.push_back(p);
-    ROS_INFO_STREAM("Marker placed with id : " << id);
-    ROS_INFO_STREAM("x: "<< x << " y: " << y << " z: " << z << std::endl);
+
+    // Store Docking points
+    centers.push_back(center);
+    ROS_DEBUG_STREAM("x: "<< x << " y: " << y << " z: " << z << " ID: " << id);
+
+    // Publish point by placing in ground
     p.z = 0.0;
-    markerPub.publish(points);
+    points.points.push_back(p);
+    markerPub.publish(points);\
+
+    // New id for next marker
     id += 1;
     centers.push_back(center);
   }

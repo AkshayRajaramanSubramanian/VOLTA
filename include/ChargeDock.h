@@ -40,18 +40,14 @@
 #include "geometry_msgs/Twist.h"
 #include "opencv-3.3.1-dev/opencv2/core/types.hpp"
 
-#include "visualization_msgs/Marker.h"
-#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
-#include "opencv-3.3.1-dev/opencv2/core/types.hpp"
-
 /**
  * @brief Holds all charge dock coordinates with respect to map frame
  */
 class ChargeDock {
   ros::NodeHandle n;
-  ros::Publisher markerPub;
-  int id = 0;
-  std::vector<cv::Point3f> centers;
+  ros::Publisher markerPub;   // <! Publisher to publish RVIX marker
+  int id = 0;   // <! Marker ID
+  std::vector<cv::Point3f> centers;   // <! Store all docking points
  public:
   /**
    * @brief returns the charging dock information on request
@@ -61,7 +57,7 @@ class ChargeDock {
   void placeChargeDock(float x, float y, float z);
   /**
    * @brief returns the charging dock information on request
-   * @param point Point to be vhecked for ball park
+   * @param point Point to be checked for ball park
    * @return None
    */
   bool ballParkCheck(cv::Point3f point);
