@@ -180,7 +180,6 @@ ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
   imagePub = it.advertise("/image_converter/output_video", 100);
   dep = nh.subscribe("/camera/depth/points", 1,
                      &ChargeDockDetection::depthcallback, this);
-  cv::namedWindow(OPENCV_WINDOW);
 }
 
 void ChargeDockDetection::publishChargerDocPos() {
@@ -233,9 +232,7 @@ void ChargeDockDetection::checkerBoardDetect(cv_bridge::CvImagePtr cvPtr) {
   } else {
   }
   drawChessboardCorners(img, patternsize, cv::Mat(corners), patternfound);
-  cv::imshow(OPENCV_WINDOW, img);
   imagePub.publish(cv_bridge::CvImage(cvPtr->header, "bgr8", img).toImageMsg());
-  cv::waitKey(1);
 }
 
 void ChargeDockDetection::findChargePosition() {
@@ -247,6 +244,5 @@ void ChargeDockDetection::svmTrainer() {
 }
 
 ChargeDockDetection::~ChargeDockDetection() {
-  cv::destroyWindow(OPENCV_WINDOW);
 }
 
