@@ -1,7 +1,7 @@
 <launch>
     <arg name = "rate" default = "5" />
     <node
-      name="volta"
+      name="voltafortest"
       pkg="volta"
       type="volta"
       args="$(arg rate)"

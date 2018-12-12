@@ -50,6 +50,8 @@
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "ChargeDock.h"
 
+#include "Explore.h"
+
 /**
  * @brief Class runs image processing on captured images to detect charging dock
  */
