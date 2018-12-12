@@ -197,6 +197,7 @@ include_directories(
 add_executable(volta 
 		src/volta.cpp
 		src/Explore.cpp
+		src/ROSExplore.cpp
 		src/ChargeDock.cpp
 		src/ChargeDockDetection.cpp)
 
