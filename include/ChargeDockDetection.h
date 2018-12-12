@@ -49,6 +49,8 @@
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 
+#include "Explore.h"
+
 /**
  * @brief Class runs image processing on captured images to detect charging dock
  */

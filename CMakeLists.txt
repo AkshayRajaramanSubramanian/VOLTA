@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
 
+  nav_msgs
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -196,8 +197,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(volta 
 		src/volta.cpp
-		src/BugAlgorithm.cpp
-		src/BugControl.cpp
+		src/Explore.cpp
 		src/ChargeDock.cpp
 		src/ChargeDockDetection.cpp
 		src/CoordinatorClass.cpp
