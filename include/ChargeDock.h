@@ -39,7 +39,6 @@
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "opencv-3.3.1-dev/opencv2/core/types.hpp"
-#include "Explore.h"
 
 /**
  * @brief Holds all charge dock coordinates with respect to map frame
@@ -77,3 +76,4 @@ class ChargeDock {
 };
 
 #endif /* VOLTA_SRC_CHARGEDOCK_H_ */
+

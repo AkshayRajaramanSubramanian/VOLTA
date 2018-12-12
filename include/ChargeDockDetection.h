@@ -36,7 +36,7 @@
 
 #include <vector>
 #include <string>
-#include "BugAlgorithm.h"
+#include "Explore.h"
 #include "ros/ros.h"
 #include "tf/transform_broadcaster.h"
 #include "sensor_msgs/image_encodings.h"
@@ -49,8 +49,6 @@
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "ChargeDock.h"
-
-#include "Explore.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
@@ -153,3 +151,4 @@ class ChargeDockDetection {
 };
 
 #endif /* VOLTA_SRC_CHARGEDOCKDETECTION_H_ */
+
