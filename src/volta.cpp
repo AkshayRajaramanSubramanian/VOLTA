@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "volta");
   ros::NodeHandle nh;
   ChargeDockDetection chargeDockdetect(nh);
-  Explore explore(nh);
+  //Explore explore(nh);
   ros::spin();
   return 0;
 }

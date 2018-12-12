@@ -49,6 +49,7 @@
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "ChargeDock.h"
+#include "ROSChargeDock.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
@@ -79,7 +80,8 @@ class ChargeDockDetection {
   // <!Coordinates of charging dock
   point chargeMarker;
   cv::Point2f center;
-  ChargeDock dock;
+  //ChargeDock dock;
+  ROSChargeDock ChargeDockROS;
  public:
 
   /**

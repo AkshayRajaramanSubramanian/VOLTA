@@ -36,7 +36,6 @@
 #include <cmath>
 #include "../include/ChargeDockDetection.h"
 #include "../include/ChargeDock.h"
-#include "ros/ros.h"
 #include "image_transport/image_transport.h"
 #include "cv_bridge/cv_bridge.h"
 #include "sensor_msgs/image_encodings.h"
@@ -55,6 +54,7 @@
 #include "sensor_msgs/PointCloud2.h"
 #include "tf/transform_listener.h"
 #include "tf/transform_datatypes.h"
+#include "../include/ROSChargeDock.h"
 
 cv::Point2f ChargeDockDetection::centroid(std::vector<cv::Point2f> points) {
   int xSum = 0;
@@ -128,7 +128,8 @@ void ChargeDockDetection::broadcastTf(float x, float y, float z) {
 
   //ROS_INFO_STREAM("x: "<< x << " y: " << y << " z: " << z);
   //ROS_INFO_STREAM("X: "<< wX << " Y: " << wY << " Z: " << wZ);
-  dock.placeChargeDock(wX, wY, wZ);
+  // dock.placeChargeDock(wX, wY, wZ);
+  ChargeDockROS.placeChargeDock(wX, wY, wZ);
 }
 
 void ChargeDockDetection::depthcallback(
@@ -170,7 +171,7 @@ void ChargeDockDetection::getXYZ(int x, int y) {
 ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
     : nh(_nh),
       it(_nh),
-      dock(_nh) {
+      ChargeDockROS(_nh) {
   // Subbscribe to Raw image
   imageSub = it.subscribe("/camera/rgb/image_raw", 1,
                           &ChargeDockDetection::checkForChargeDock, this);
@@ -180,6 +181,7 @@ ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
   imagePub = it.advertise("/image_converter/output_video", 100);
   dep = nh.subscribe("/camera/depth/points", 1,
                      &ChargeDockDetection::depthcallback, this);
+ // cv::namedWindow(OPENCV_WINDOW);
 }
 
 void ChargeDockDetection::publishChargerDocPos() {
@@ -232,7 +234,9 @@ void ChargeDockDetection::checkerBoardDetect(cv_bridge::CvImagePtr cvPtr) {
   } else {
   }
   drawChessboardCorners(img, patternsize, cv::Mat(corners), patternfound);
+  //cv::imshow(OPENCV_WINDOW, img);
   imagePub.publish(cv_bridge::CvImage(cvPtr->header, "bgr8", img).toImageMsg());
+  cv::waitKey(1);
 }
 
 void ChargeDockDetection::findChargePosition() {
@@ -244,5 +248,6 @@ void ChargeDockDetection::svmTrainer() {
 }
 
 ChargeDockDetection::~ChargeDockDetection() {
+//  cv::destroyWindow(OPENCV_WINDOW);
 }
 
