@@ -44,8 +44,9 @@
 #include <cmath>
 #include <algorithm>
 #include <stack>
+
 /**
- * @brief class description for Explore
+ * @brief enum describing possible robot movements
  */
 
 typedef enum _ROBOT_MOVEMENT {
@@ -59,14 +60,34 @@ typedef enum _ROBOT_MOVEMENT {
 
 } ROBOT_MOVEMENT;
 
+/**
+ * @brief struct for type point
+ */
+
+struct point {
+  int x;  // !<X co-ordinate of point
+  int y;  // !<Y co-ordinate of point
+};
 
 class Explore {
  public:
   ros::NodeHandle n;
   explicit Explore(ros::NodeHandle &n);
   ~Explore();
+/**
+ * @brief function to set the movement of the robot
+ * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
+ */
   bool robot_move (const ROBOT_MOVEMENT move_type);
+/**
+ * @brief callback function for receiving the laser scan data
+ * @param pointer to laser scan data
+ */
   void getLaserData (const sensor_msgs::LaserScan::ConstPtr &scan_msg);
+/**
+ * @brief callback function for receiving the map data
+ * @param pointer to occupancy grid data
+ */
   void getMapData (const nav_msgs::OccupancyGrid::ConstPtr &msg);
   ros::Publisher motor_command_publisher;
   ros::Subscriber laser_subscriber;
