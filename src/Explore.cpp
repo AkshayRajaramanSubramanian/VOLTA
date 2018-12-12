@@ -43,24 +43,37 @@
 #include <algorithm>
 #include <stack>
 #define PI 3.141592
+
 /**
  * @brief constructor for initializing Explore object
  * @param NodeHandle n
  */
 
 Explore::Explore(ros::NodeHandle &n) : n(n) {
+	//publish motor commands
 	motor_command_publisher = n.advertise<geometry_msgs::Twist> ( "/mobile_base/commands/velocity", 100 );
+	//subscribe to laser data
     laser_subscriber = n.subscribe ( "/scan", 1000, &Explore::getLaserData, this);
-    map_subscriber = n.subscribe ( "/map", 1000, &Explore::getMapData, this);
+	//subscribe to map data    
+	map_subscriber = n.subscribe ( "/map", 1000, &Explore::getMapData, this);
 }
+
+/**
+ * @brief destructor function
+ */
 
 Explore::~Explore() {}
 
+
+
 /**
- * @brief callback function that runs when data is being subscribed from the robot
+ * @brief function to set the movement of the robot
+ * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
  */
+
 bool Explore::robot_move ( const ROBOT_MOVEMENT move_type ) {
-    if ( move_type == STOP ) {
+	// set motor commands for each scenario    
+	if ( move_type == STOP ) {
         
         motor_command.angular.z = 0.0;
         motor_command.linear.x = 0.0;
@@ -78,12 +91,12 @@ bool Explore::robot_move ( const ROBOT_MOVEMENT move_type ) {
 
     else if ( move_type == TURN_LEFT ) {
         motor_command.linear.x = 0.0;
-        motor_command.angular.z = 1.0;
+        motor_command.angular.z = 0.75;
     }
 
     else if ( move_type == TURN_RIGHT ) {
         motor_command.linear.x = 0.0;
-        motor_command.angular.z = -1.0;
+        motor_command.angular.z = -0.75;
     } 
     else if ( move_type == GO_RIGHT ) {
         motor_command.linear.x = 0.25;
@@ -96,18 +109,25 @@ bool Explore::robot_move ( const ROBOT_MOVEMENT move_type ) {
     else {
         return false;
     }
-
+	// publish motor command
     motor_command_publisher.publish ( motor_command );
     usleep(10);
     return true;
 }
 
+/**
+ * @brief callback function for receiving the laser scan data
+ * @param pointer to laser scan data
+ */
+
 void Explore::getLaserData ( const sensor_msgs::LaserScan::ConstPtr &scan_msg ) {
     laser_msg = *scan_msg;
     std::vector<float> laser_ranges;
+	// get laser scan range
     laser_ranges = laser_msg.ranges;
     size_t range_size = laser_ranges.size();    
     float left_side = 0.0, right_side = 0.0;
+	// get maximum and minimum ranges for laser scan
     float range_min = laser_msg.range_max;
 	float range_max = laser_msg.range_min;
     int nan_count = 0;
@@ -141,15 +161,18 @@ void Explore::getLaserData ( const sensor_msgs::LaserScan::ConstPtr &scan_msg ) 
     }
     if (!crashed) {
         
-        if (range_min <= 0.5 && !thats_a_door){
+        if (range_min <= 1 && !thats_a_door){
             following_wall = true;
             crashed = false;
+			// stop the robot before taking a decision to move
             robot_move(STOP);
             
             if (left_side >= right_side) {
+				// turn the robot to the right
                 robot_move(TURN_RIGHT);
             }
             else {
+				// turn the robot to the left
                 robot_move(TURN_LEFT);  
             }
         }
@@ -162,23 +185,31 @@ void Explore::getLaserData ( const sensor_msgs::LaserScan::ConstPtr &scan_msg ) 
                 }
             } 
             if (thats_a_door) {
-                if (laser_ranges[0] <= 0.5){
+                if (laser_ranges[0] <= 1){
                     thats_a_door = false;
                 }
                 else {
+					// move the robot to the right
                     robot_move(GO_RIGHT);  
                 }
                 
             }
             else {
+				// move the robot forward
                 robot_move(FORWARD);  
             }
         }
     }
     else {
+		// move the robot backwards
         robot_move(BACKWARD);
     }
 }
+
+/**
+ * @brief callback function for receiving the map data
+ * @param pointer to occupancy grid data
+ */
 
 void Explore::getMapData ( const nav_msgs::OccupancyGrid::ConstPtr &msg ) {
     const bool chatty_map = true;

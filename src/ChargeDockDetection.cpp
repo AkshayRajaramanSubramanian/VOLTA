@@ -249,3 +249,4 @@ void ChargeDockDetection::svmTrainer() {
 ChargeDockDetection::~ChargeDockDetection() {
   cv::destroyWindow(OPENCV_WINDOW);
 }
+
