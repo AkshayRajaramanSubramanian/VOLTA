@@ -34,15 +34,53 @@
 #ifndef VOLTA_SRC_CHARGEDOCKDETECTION_H_
 #define VOLTA_SRC_CHARGEDOCKDETECTION_H_
 
+#include <vector>
+#include <string>
+#include "BugAlgorithm.h"
+#include "ros/ros.h"
+#include "tf/transform_broadcaster.h"
+#include "sensor_msgs/image_encodings.h"
+#include "image_transport/image_transport.h"
+#include "sensor_msgs/PointCloud2.h"
+#include "cv_bridge/cv_bridge.h"
+#include "opencv-3.3.1-dev/opencv2/imgproc/imgproc.hpp"
+#include "opencv-3.3.1-dev/opencv2/highgui/highgui.hpp"
+#include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
+#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
+#include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
+
 #include "Explore.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
  */
 class ChargeDockDetection {
- public:
+ private:
+  // <!Node nandle reference
+  ros::NodeHandle nh;
+  // <!Image in OpenCV format
+  image_transport::ImageTransport it;
+  // <!Subscriber to camera sensor image
+  image_transport::Subscriber imageSub;
+  // <!Publish OpenCV formated image
+  image_transport::Publisher imagePub;
+  // <!Display window of camera sensor
+  const std::string OPENCV_WINDOW = "chargedock";
+  const std::string CHK_WINDOW = "checkerimg";
+  // <!Twist message publisher
+  ros::Publisher twistpublisher;
+  // <!Point cloud data of turtle bot RGBD sensor
+  sensor_msgs::PointCloud2 my_pcl;
+  // <!Flag to check for new RGBD image
+  bool hasNewPcl = false;
+  // <!Flag for checking if image has charging dock
+  bool check = false;
+  // <!Subscribe to depth image sensor (RGBD)
+  ros::Subscriber dep;
   // <!Coordinates of charging dock
   point chargeMarker;
+ public:
+
   /**
    * @brief Publish charge dock coordinates to chargeDock topic
    * @param None
@@ -51,10 +89,10 @@ class ChargeDockDetection {
   void publishChargerDocPos();
   /**
    * @brief Image processing algorithm to find presence of charging dock
-   * @param None
+   * @param msg Pointer for image in OpenCV format
    * @return None
    */
-  void checkForChargeDock();
+  void checkForChargeDock(const sensor_msgs::ImageConstPtr& msg);
   /**
    * @brief Calculate charging dock coordinates with respect to map frame
    * @param None
@@ -68,11 +106,29 @@ class ChargeDockDetection {
    */
   void svmTrainer();
   /**
-   * @brief Constructor for the class
-   * @param None
+   * @brief Image detection algorithm for checker board
+   * @param Pointer to OpenCV image
    * @return None
    */
-  ChargeDockDetection();
+  void checkerBoardDetect(cv_bridge::CvImagePtr cvPtr);
+  /**
+   * @brief Call back function for receiving RGBD image
+   * @param Pointer to depth image
+   * @return None
+   */
+  void depthcallback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg);
+  /**
+   * @brief Get X, Y and Z coordinates of charge dock
+   * @param X, Y the xy points on image were charge dock is detected
+   * @return None
+   */
+  void getXYZ(int x, int y);
+  /**
+   * @brief Constructor for the class
+   * @param nh Node handle
+   * @return None
+   */
+  ChargeDockDetection(ros::NodeHandle _nh);
   /**
    * @brief Destructor for the class
    * @param None

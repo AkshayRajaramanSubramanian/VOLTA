@@ -29,6 +29,8 @@ add_compile_options(-std=c++11)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+#find_package(PCL REQUIRED)
+find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
@@ -36,6 +38,20 @@ find_package(catkin REQUIRED COMPONENTS
   rostest
   geometry_msgs
   sensor_msgs
+  image_transport
+  cv_bridge
+
+  pcl_conversions
+  pcl_msgs
+  pcl_ros
+  rosbag
+  rosconsole
+  roscpp
+  roslib
+  sensor_msgs
+  std_msgs
+  tf
+
   nav_msgs
 )
 
@@ -162,6 +178,8 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+#  ${PCL_INCLUDE_DIRS}
+  worlds
 )
 
 ## Declare a C++ library
@@ -196,7 +214,11 @@ add_executable(volta
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(volta ${catkin_LIBRARIES})
+target_link_libraries(volta ${catkin_LIBRARIES}
+				${catkin_LIBRARIES}
+				${OpenCV_LIBS}
+#				${PCL_INCLUDE_DIRS}
+				)
 
 #############
 ## Install ##
