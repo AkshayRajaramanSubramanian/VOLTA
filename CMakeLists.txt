@@ -52,7 +52,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
 
-  nav_msgs
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -198,11 +197,8 @@ include_directories(
 add_executable(volta 
 		src/volta.cpp
 		src/Explore.cpp
-		#src/ChargeDock.cpp
-		#src/ChargeDockDetection.cpp
-		#src/CoordinatorClass.cpp
-		#src/SLAM.cpp
-		)
+		src/ChargeDock.cpp
+		src/ChargeDockDetection.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -270,7 +266,7 @@ target_link_libraries(volta ${catkin_LIBRARIES}
 # catkin_add_nosetests(test)
 
 if (CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
+  find_package(rostest REQUIRED)	
   add_rostest_gtest(
   ${PROJECT_NAME}_test
   test/volta_test.test
@@ -279,17 +275,11 @@ if (CATKIN_ENABLE_TESTING)
   test/ExploreTest.cpp
   src/Explore.cpp
   )
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
-)
   target_link_libraries(
   ${PROJECT_NAME}_test
   ${catkin_LIBRARIES}
   )
 add_dependencies(volta ${PROJECT_NAME}_test ${catkin_EXPORTED_TARGETS})
-
-#add_dependencies(${PROJECT_NAME}_test volta ${catkin_EXPORTED_TARGETS})
 endif()
 
 if (ROS_CI_COVERALLS)
