@@ -32,7 +32,7 @@
  */
 
 #include "ros/ros.h"
-
+#include "../include/Explore.h"
 /**
  * @brief Main block that runs the node.
  * @param argc Number of command line arguments
@@ -42,5 +42,8 @@
 int main(int argc, char **argv) {
   // Initializing ROS
   ros::init(argc, argv, "volta");
+  ros::NodeHandle n;
+  Explore explore(n);
+  ros::spin();
   return 0;
 }
