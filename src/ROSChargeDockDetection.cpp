@@ -37,26 +37,16 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include "../include/ChargeDockDetection.h"
-#include "../include/ChargeDock.h"
 #include "image_transport/image_transport.h"
 #include "cv_bridge/cv_bridge.h"
-#include "sensor_msgs/image_encodings.h"
-#include "opencv-3.3.1-dev/opencv2/imgproc/imgproc.hpp"
-#include "opencv-3.3.1-dev/opencv2/highgui/highgui.hpp"
-#include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
-#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
-#include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "tf/transform_broadcaster.h"
 #include "image_transport/image_transport.h"
-#include "sensor_msgs/image_encodings.h"
-#include "geometry_msgs/Twist.h"
-#include "geometry_msgs/Vector3.h"
 #include "pcl_ros/transforms.h"
-#include "pcl_conversions/pcl_conversions.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "tf/transform_listener.h"
 #include "tf/transform_datatypes.h"
+#include "../include/ChargeDockDetection.h"
+#include "../include/ChargeDock.h"
 #include "../include/ROSChargeDock.h"
 
 ROSChargeDockDetection::ROSChargeDockDetection(ros::NodeHandle _nh)
@@ -72,7 +62,6 @@ ROSChargeDockDetection::ROSChargeDockDetection(ros::NodeHandle _nh)
   imagePub = it.advertise("/image_converter/output_video", 100);
   dep = nh.subscribe("/camera/depth/points", 1,
                      &ROSChargeDockDetection::depthcallback, this);
-// cv::namedWindow(OPENCV_WINDOW);
 }
 
 void ROSChargeDockDetection::depthcallback(
@@ -80,30 +69,39 @@ void ROSChargeDockDetection::depthcallback(
   // Save latest RGBD image
   hasNewPcl = ChDockDetect.depthcallback(cloud_msg);
 }
+
 void ROSChargeDockDetection::checkForChargeDock(
     const sensor_msgs::ImageConstPtr& msg) {
   cv_bridge::CvImagePtr cvPtr;
   cv::Mat img;
   std::vector<cv::Point2f> corners;
+  // Get image in which checker board has to be detected
   cvPtr = ChDockDetect.checkForChargeDock(msg);
+  // Finds the corner points and marks them on image
   img = ChDockDetect.checkerBoardDetect(cvPtr, corners);
+  // Publish the marked image for RVIZ visuvalization
   imagePub.publish(cv_bridge::CvImage(cvPtr->header, "bgr8", img).toImageMsg());
   if (corners.size() > 30) {
+    // Check if new RGBD image is available
     if (hasNewPcl) {
+      // Calculate center of the checker board
       center = ChDockDetect.centroid(corners);
+      // Variables to hold X,Y,Z coordinates in map
       float depthX;
       float depthY;
       float depthZ;
+      // Check if charge dock point can be found in RGBD image
       if (ChDockDetect.getXYZ(center.x, center.y, depthX, depthY, depthZ)) {
         broadcastTf(depthX, depthY, depthZ);
       }
+      // Flag to specify the latest RGBD image is processed
       hasNewPcl = false;
     }
-  } else {
   }
 }
 
 void ROSChargeDockDetection::broadcastTf(float x, float y, float z) {
+  // Get transform in terms of camera link frame
   tf::Transform tr = ChDockDetect.broadcastTflocal(x, y, z);
   // Broadcast transform frame to talker with respect to bamera base frame
   br.sendTransform(
@@ -120,10 +118,13 @@ void ROSChargeDockDetection::broadcastTf(float x, float y, float z) {
     ROS_ERROR("%s", ex.what());
     ros::Duration(1.0).sleep();
   }
+  // Get transform in terms of odom frame
   tr = ChDockDetect.broadcastTfodom(transform, x, y, z);
   br.sendTransform(tf::StampedTransform(tr, ros::Time::now(), "odom", "volta"));
+  // Place charge dock marker
   ChargeDockROS.placeChargeDock(x, y, z);
 }
+
 ROSChargeDockDetection::~ROSChargeDockDetection() {
 }
 

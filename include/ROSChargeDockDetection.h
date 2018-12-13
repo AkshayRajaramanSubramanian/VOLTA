@@ -43,32 +43,27 @@
 #include "image_transport/image_transport.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "cv_bridge/cv_bridge.h"
-#include "opencv-3.3.1-dev/opencv2/imgproc/imgproc.hpp"
-#include "opencv-3.3.1-dev/opencv2/highgui/highgui.hpp"
-#include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
-#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
-#include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "ChargeDock.h"
 #include "ROSChargeDock.h"
 #include "ChargeDockDetection.h"
 
+/**
+ * @brief Class detects charging docks and publishes related messages
+ */
 class ROSChargeDockDetection {
  public:
-//   <!Node nandle reference
+  // <!Node nandle reference
   ros::NodeHandle nh;
-//     <!Image in OpenCV format
+  // <!Image in OpenCV format
   image_transport::ImageTransport it;
-//   <!Subscriber to camera sensor image
+  // <!Subscriber to camera sensor image
   image_transport::Subscriber imageSub;
-//   <!Publish OpenCV formated image
+  // <!Publish OpenCV formated image
   image_transport::Publisher imagePub;
-//   <!Display window of camera sensor
-//  const std::string OPENCV_WINDOW = "chargedock";
-//  const std::string CHK_WINDOW = "checkerimg";
-//   <!Twist message publisher
+  // <!Display window of camera sensor
+  // <!Twist message publisher
   ros::Publisher twistpublisher;
-//   <!Point cloud data of turtle bot RGBD sensor
-//  sensor_msgs::PointCloud2 my_pcl;
+  // <!Point cloud data of turtle bot RGBD sensor
   // <!Flag to check for new RGBD image
   bool hasNewPcl = false;
   // <!Flag for checking if image has charging dock
@@ -77,17 +72,39 @@ class ROSChargeDockDetection {
   ros::Subscriber dep;
   // <!Coordinates of charging dock
   cv::Point2f center;
-  //ChargeDock dock;
   ROSChargeDock ChargeDockROS;
   ChargeDockDetection ChDockDetect;
   tf::TransformBroadcaster br;
 
+  /**
+   * @brief Constructor for the class
+   * @param nh Node handle
+   * @return None
+   */
   ROSChargeDockDetection(ros::NodeHandle _nh);
-
-  void depthcallback(
-      const sensor_msgs::PointCloud2ConstPtr& cloud_msg);
+  /**
+   * @brief Call back function for receiving RGBD image
+   * @param Pointer to depth image
+   * @return None
+   */
+  void depthcallback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg);
+  /**
+   * @brief Image processing algorithm to find presence of charging dock
+   * @param msg Pointer for image in OpenCV format
+   * @return none
+   */
   void checkForChargeDock(const sensor_msgs::ImageConstPtr& msg);
+  /**
+   * @brief Places markers for charging docks in rviz environment
+   * @param Transform Transform form odom to camera link
+   * @return none
+   */
   void broadcastTf(float x, float y, float z);
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
   virtual ~ROSChargeDockDetection();
 };
 
