@@ -29,7 +29,7 @@ add_compile_options(-std=c++11)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(PCL REQUIRED)
+#find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -177,7 +177,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
-  ${PCL_INCLUDE_DIRS}
+#  ${PCL_INCLUDE_DIRS}
   worlds
 )
 
@@ -198,7 +198,9 @@ add_executable(volta
 		src/volta.cpp
 		src/Explore.cpp
 		src/ChargeDock.cpp
-		src/ChargeDockDetection.cpp)
+		src/ChargeDockDetection.cpp
+		src/ROSChargeDock.cpp
+		src/ROSChargeDockDetection.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -214,7 +216,7 @@ add_executable(volta
 target_link_libraries(volta ${catkin_LIBRARIES}
 				${catkin_LIBRARIES}
 				${OpenCV_LIBS}
-				${PCL_INCLUDE_DIRS}
+#				${PCL_INCLUDE_DIRS}
 				)
 
 #############
@@ -293,3 +295,4 @@ endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
