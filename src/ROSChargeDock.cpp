@@ -1,10 +1,10 @@
 /*
- * @file volta.cpp
+ * @file ROSChargeDock.cpp
  * @Copyright MIT license
  * Copyright (c) 2018 Bala Murali Manoghar Sai Sudhakar, Akshay Rajaraman
  * @author Bala Murali Manoghar Sai Sudhakar
  * @author Akshay Rajaraman
- * @brief This demonstrates volta robot.
+ * @brief Class detects presence of charging dock in image captured by robot
  */
 
 /*
@@ -31,26 +31,36 @@
  * SOFTWARE.
  */
 
+#include <vector>
+#include "../include/ROSChargeDock.h"
 #include "ros/ros.h"
+#include "../include/ChargeDock.h"
+#include "geometry_msgs/Twist.h"
+#include "visualization_msgs/Marker.h"
+#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
+#include "opencv-3.3.1-dev/opencv2/core/types.hpp"
 
-#include "../include/ChargeDockDetection.h"
-#include "../include/ROSChargeDockDetection.h"
-
-/**
- * @brief Main block that runs the node.
- * @param argc Number of command line arguments
- * @param argv Pointer to command line arguments
- * @return Status of execution
- */
-
-int main(int argc, char **argv) {
-  // Initializing ROS
-  ros::init(argc, argv, "volta");
-  ros::NodeHandle nh;
-  ROSChargeDockDetection chargeDockdetect(nh);
-  //Explore explore(nh);
-  ros::spin();
-  return 0;
+ROSChargeDock::ROSChargeDock(ros::NodeHandle _nh)
+    : n(_nh) {
+  markerPub = n.advertise<visualization_msgs::Marker>("ChargePoint", 10);
 }
 
+void ROSChargeDock::PublishChargeDock(visualization_msgs::Marker marker) {
+  markerPub.publish(marker);
+}
+
+void ROSChargeDock::placeChargeDock(float x, float y, float z) {
+  // <! Build cernter point structure
+  cv::Point3f center;
+  center.x = x;
+  center.y = y;
+  center.z = z;
+  // <!check if charge dock is already published and place marker accordingly
+  if (!Chargedock.ballParkCheck(center)) {
+    PublishChargeDock(Chargedock.placeChargeDock(x, y, z));
+  }
+}
+
+ROSChargeDock::~ROSChargeDock() {
+}
 

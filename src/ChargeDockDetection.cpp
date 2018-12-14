@@ -36,7 +36,6 @@
 #include <cmath>
 #include "../include/ChargeDockDetection.h"
 #include "../include/ChargeDock.h"
-#include "ros/ros.h"
 #include "image_transport/image_transport.h"
 #include "cv_bridge/cv_bridge.h"
 #include "sensor_msgs/image_encodings.h"
@@ -45,7 +44,6 @@
 #include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
-#include "tf/transform_broadcaster.h"
 #include "image_transport/image_transport.h"
 #include "sensor_msgs/image_encodings.h"
 #include "geometry_msgs/Twist.h"
@@ -53,7 +51,6 @@
 #include "pcl_ros/transforms.h"
 #include "pcl_conversions/pcl_conversions.h"
 #include "sensor_msgs/PointCloud2.h"
-#include "tf/transform_listener.h"
 #include "tf/transform_datatypes.h"
 
 cv::Point2f ChargeDockDetection::centroid(std::vector<cv::Point2f> points) {
@@ -68,9 +65,8 @@ cv::Point2f ChargeDockDetection::centroid(std::vector<cv::Point2f> points) {
   return center;
 }
 
-void ChargeDockDetection::broadcastTf(float x, float y, float z) {
-  // Initializing a broadcast for transform frame
-  static tf::TransformBroadcaster br;
+tf::Transform ChargeDockDetection::broadcastTflocal(float x, float y, float z) {
+
   // Create transform variable
   tf::Transform tr;
   // Set origin of transformation
@@ -80,22 +76,9 @@ void ChargeDockDetection::broadcastTf(float x, float y, float z) {
   // Set zero rotation
   q.setRPY(0, 0, 0);
   tr.setRotation(q);
-  // Broadcast transform frame to talker with respect to bamera base frame
-  br.sendTransform(
-      tf::StampedTransform(tr, ros::Time::now(), "camera_depth_optical_frame",
-                           "volta"));
-  //Create transform listener and get transformation form world frame to camera base link
-  tf::TransformListener listener;
-  tf::StampedTransform transform;
-  try {
-    listener.waitForTransform("/odom", "/camera_depth_optical_frame",
-                              ros::Time(0), ros::Duration(10.0));
-    listener.lookupTransform("/odom", "/camera_depth_optical_frame",
-                             ros::Time(0), transform);
-  } catch (tf::TransformException &ex) {
-    ROS_ERROR("%s", ex.what());
-    ros::Duration(1.0).sleep();
-  }
+  return tr;
+}
+tf::Transform ChargeDockDetection::broadcastTfodom(tf::StampedTransform transform, float &x, float &y, float &z){
   // Calculate the charge dock in real world coordinates
   // W = R.P + T
   tf::Matrix3x3 m(transform.getRotation());
@@ -121,126 +104,65 @@ void ChargeDockDetection::broadcastTf(float x, float y, float z) {
   float wZ = r31 * z + r32 * y + r33 * z + Tz;
 
   // Broadcast calculated point with respect to odom
+  tf::Transform tr;
+  tf::Quaternion q;
   tr.setOrigin(tf::Vector3(wX, wY, wZ));
   q.setRPY(0, 0, 0);
   tr.setRotation(q);
-  br.sendTransform(tf::StampedTransform(tr, ros::Time::now(), "odom", "volta"));
+  // Store the points in variables used by caller
+  x = wX;
+  y = wY;
+  z = wZ;
 
-  //ROS_INFO_STREAM("x: "<< x << " y: " << y << " z: " << z);
-  //ROS_INFO_STREAM("X: "<< wX << " Y: " << wY << " Z: " << wZ);
-  dock.placeChargeDock(wX, wY, wZ);
+  return tr;
 }
 
-void ChargeDockDetection::depthcallback(
+bool ChargeDockDetection::depthcallback(
     const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
   // Save latest RGBD image
   my_pcl = *cloud_msg;
-  hasNewPcl = true;
+  return true;
 }
 
-void ChargeDockDetection::getXYZ(int x, int y) {
+bool ChargeDockDetection::getXYZ(int x, int y, float &depthX, float &depthY, float &depthZ) {
   // Decrypt X, Y,Z position form RGBD data
   int arrayPosition = y * my_pcl.row_step + x * my_pcl.point_step;
   int arrayPosX = arrayPosition + my_pcl.fields[0].offset;  // X has an offset of 0
   int arrayPosY = arrayPosition + my_pcl.fields[1].offset;  // Y has an offset of 4
   int arrayPosZ = arrayPosition + my_pcl.fields[2].offset;  // Z has an offset of 8
   // X, Y, Z points calculated from RGBD
-  float depthX;
-  float depthY;
-  float depthZ;
-
   memcpy(&depthX, &my_pcl.data[arrayPosX], sizeof(float));
   memcpy(&depthY, &my_pcl.data[arrayPosY], sizeof(float));
   memcpy(&depthZ, &my_pcl.data[arrayPosZ], sizeof(float));
-
-  // Convert to odom coordinates and publish
-  if (!(std::isnan(depthX) || std::isnan(depthY) || std::isnan(depthZ))) {
-    broadcastTf(depthX, depthY, depthZ);
-  }
-
-  /*
-   geometry_msgs::Point p;
-   // put data into the point p
-   p.x = depthX;
-   p.y = depthY;
-   p.z = depthZ;
-   */
+  return !(std::isnan(depthX) || std::isnan(depthY) || std::isnan(depthZ));
 }
 
-ChargeDockDetection::ChargeDockDetection(ros::NodeHandle _nh)
-    : nh(_nh),
-      it(_nh),
-      dock(_nh) {
-  // Subbscribe to Raw image
-  imageSub = it.subscribe("/camera/rgb/image_raw", 1,
-                          &ChargeDockDetection::checkForChargeDock, this);
-  if (imageSub == NULL) {
-    ROS_ERROR_STREAM("Images not getting read properly");
-  }
-  imagePub = it.advertise("/image_converter/output_video", 100);
-  dep = nh.subscribe("/camera/depth/points", 1,
-                     &ChargeDockDetection::depthcallback, this);
-}
-
-void ChargeDockDetection::publishChargerDocPos() {
+ChargeDockDetection::ChargeDockDetection() {
 
 }
 
-void ChargeDockDetection::checkForChargeDock(
+cv_bridge::CvImagePtr ChargeDockDetection::checkForChargeDock(
     const sensor_msgs::ImageConstPtr& msg) {
   // Convert Raw image to OpenCV image format
   cv_bridge::CvImagePtr cvPtr;
-  try {
-    cvPtr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
-  } catch (cv_bridge::Exception& e) {
-    ROS_ERROR_STREAM("cv_bridge exception: "<< e.what());
-    return;
-  }
-  // check if there is checker board
-  checkerBoardDetect(cvPtr);
+  cvPtr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+  return cvPtr;
 }
 
-void ChargeDockDetection::checkerBoardDetect(cv_bridge::CvImagePtr cvPtr) {
+cv::Mat ChargeDockDetection::checkerBoardDetect(
+    cv_bridge::CvImagePtr cvPtr, std::vector<cv::Point2f> &corners) {
   cv::Mat img, gray;
   cv::Size patternsize(6, 7);  //interior number of corners
   img = cvPtr->image;
   cv::cvtColor(img, gray, CV_BGR2GRAY);
-  std::vector<cv::Point2f> corners;
   bool patternfound = findChessboardCorners(
-      gray,
-      patternsize,
-      corners,
-      cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE
-          + cv::CALIB_CB_FAST_CHECK);
-  /*
-   if(patternfound)
-   {
-   ROS_INFO_STREAM("Charging Dock Found; no corners : " << corners.size());
-   cornerSubPix(grey, corners, cv::Size(11, 11), cv::Size(-1, -1),
-   cv::TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
-   }
-   else{
-   ROS_INFO_STREAM("Charging Dock Not Found; no corners : " << corners.size());
-   }
-   */
-  if (corners.size() > 30) {
-    if (hasNewPcl) {
-      center = centroid(corners);
-      getXYZ(center.x, center.y);
-      hasNewPcl = false;
-    }
-  } else {
-  }
+        gray,
+        patternsize,
+        corners,
+        cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE
+  + cv::CALIB_CB_FAST_CHECK);
   drawChessboardCorners(img, patternsize, cv::Mat(corners), patternfound);
-  imagePub.publish(cv_bridge::CvImage(cvPtr->header, "bgr8", img).toImageMsg());
-}
-
-void ChargeDockDetection::findChargePosition() {
-
-}
-
-void ChargeDockDetection::svmTrainer() {
-
+  return img;
 }
 
 ChargeDockDetection::~ChargeDockDetection() {

@@ -1,10 +1,10 @@
 /*
- * @file volta.cpp
+ * @file ROSChargeDock.h
  * @Copyright MIT license
  * Copyright (c) 2018 Bala Murali Manoghar Sai Sudhakar, Akshay Rajaraman
  * @author Bala Murali Manoghar Sai Sudhakar
  * @author Akshay Rajaraman
- * @brief This demonstrates volta robot.
+ * @brief Header file for bug ChargeDockDetection class.
  */
 
 /*
@@ -31,26 +31,49 @@
  * SOFTWARE.
  */
 
-#include "ros/ros.h"
+#ifndef VOLTA_SRC_ROSCHARGEDOCK_H_
+#define VOLTA_SRC_ROSCHARGEDOCK_H_
 
-#include "../include/ChargeDockDetection.h"
-#include "../include/ROSChargeDockDetection.h"
+#include <vector>
+
+#include "ChargeDock.h"
+#include "ros/ros.h"
+#include "geometry_msgs/Twist.h"
+#include "visualization_msgs/Marker.h"
+#include "opencv-3.3.1-dev/opencv2/core/types.hpp"
 
 /**
- * @brief Main block that runs the node.
- * @param argc Number of command line arguments
- * @param argv Pointer to command line arguments
- * @return Status of execution
+ * @brief Class publishes the marker of charging dock
  */
+class ROSChargeDock {
+  ros::NodeHandle n;
+  ros::Publisher markerPub;   // <! Publisher to publish RVIX marker
+  ChargeDock Chargedock;
+ public:
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
+  ROSChargeDock(ros::NodeHandle _nh);
+  /**
+   * @brief publishes chargedock marker
+   * @param marker Data to be published
+   * @return None
+   */
+  void PublishChargeDock(visualization_msgs::Marker marker);
+  /**
+   * @brief returns the charging dock information on request
+   * @param x,y,z Points that has to be published
+   * @return none
+   */
+  void placeChargeDock(float x, float y, float z);
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
+  virtual ~ROSChargeDock();
+};
 
-int main(int argc, char **argv) {
-  // Initializing ROS
-  ros::init(argc, argv, "volta");
-  ros::NodeHandle nh;
-  ROSChargeDockDetection chargeDockdetect(nh);
-  //Explore explore(nh);
-  ros::spin();
-  return 0;
-}
-
-
+#endif /* VOLTA_SRC_ROSCHARGEDOCK_H_ */

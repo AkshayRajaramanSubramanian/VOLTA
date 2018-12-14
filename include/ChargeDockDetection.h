@@ -36,94 +36,50 @@
 
 #include <vector>
 #include <string>
-#include "Explore.h"
-#include "ros/ros.h"
 #include "tf/transform_broadcaster.h"
 #include "sensor_msgs/image_encodings.h"
 #include "image_transport/image_transport.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "cv_bridge/cv_bridge.h"
-#include "opencv-3.3.1-dev/opencv2/imgproc/imgproc.hpp"
-#include "opencv-3.3.1-dev/opencv2/highgui/highgui.hpp"
-#include "opencv-3.3.1-dev/opencv2/imgcodecs/imgcodecs.hpp"
-#include "opencv-3.3.1-dev/opencv2/core/core.hpp"
-#include "opencv-3.3.1-dev/opencv2/calib3d/calib3d.hpp"
 #include "ChargeDock.h"
+#include "ROSChargeDock.h"
 
 /**
  * @brief Class runs image processing on captured images to detect charging dock
  */
 class ChargeDockDetection {
  private:
-  // <!Node nandle reference
-  ros::NodeHandle nh;
-  // <!Image in OpenCV format
-  image_transport::ImageTransport it;
-  // <!Subscriber to camera sensor image
-  image_transport::Subscriber imageSub;
-  // <!Publish OpenCV formated image
-  image_transport::Publisher imagePub;
-  // <!Display window of camera sensor
-  const std::string OPENCV_WINDOW = "chargedock";
-  const std::string CHK_WINDOW = "checkerimg";
-  // <!Twist message publisher
-  ros::Publisher twistpublisher;
-  // <!Point cloud data of turtle bot RGBD sensor
   sensor_msgs::PointCloud2 my_pcl;
-  // <!Flag to check for new RGBD image
-  bool hasNewPcl = false;
-  // <!Flag for checking if image has charging dock
-  bool check = false;
-  // <!Subscribe to depth image sensor (RGBD)
-  ros::Subscriber dep;
-  // <!Coordinates of charging dock
-  point chargeMarker;
   cv::Point2f center;
-  ChargeDock dock;
  public:
-
-  /**
-   * @brief Publish charge dock coordinates to chargeDock topic
-   * @param None
-   * @return None
-   */
-  void publishChargerDocPos();
   /**
    * @brief Image processing algorithm to find presence of charging dock
    * @param msg Pointer for image in OpenCV format
-   * @return None
+   * @return CvPointer Pointer to image of type bridge image message
    */
-  void checkForChargeDock(const sensor_msgs::ImageConstPtr& msg);
-  /**
-   * @brief Calculate charging dock coordinates with respect to map frame
-   * @param None
-   * @return None
-   */
-  void findChargePosition();
-  /**
-   * @brief Training module for charge dock detection algorithm
-   * @param None
-   * @return None
-   */
-  void svmTrainer();
+  cv_bridge::CvImagePtr checkForChargeDock(
+      const sensor_msgs::ImageConstPtr& msg);
   /**
    * @brief Image detection algorithm for checker board
-   * @param Pointer to OpenCV image
-   * @return None
+   * @param Pointer Pointer to OpenCV image and
+   * @param Corners Corners points of the checker board squares
+   * @return Image Image that has checker board marked
    */
-  void checkerBoardDetect(cv_bridge::CvImagePtr cvPtr);
+  cv::Mat checkerBoardDetect(cv_bridge::CvImagePtr cvPtr,
+                             std::vector<cv::Point2f> &corners);
   /**
    * @brief Call back function for receiving RGBD image
    * @param Pointer to depth image
-   * @return None
+   * @return Boolean Returns true every time RGBD image is receieved
    */
-  void depthcallback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg);
+  bool depthcallback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg);
   /**
    * @brief Get X, Y and Z coordinates of charge dock
-   * @param X, Y the xy points on image were charge dock is detected
-   * @return None
+   * @param X,Y the xy points on image were charge dock is detected
+   * @param depthX,depthY,depthX X, Y, Z points of the dock with respect to camera frame
+   * @return Boolean True if valid coordinates are found
    */
-  void getXYZ(int x, int y);
+  bool getXYZ(int x, int y, float &depthX, float &depthY, float &depthZ);
   /**
    * @brief Places markers for charging docks in rviz environment
    * @param points Points for which centroid has to be calculated
@@ -131,17 +87,25 @@ class ChargeDockDetection {
    */
   cv::Point2f centroid(std::vector<cv::Point2f> points);
   /**
-   * @brief Places markers for charging docks in rviz environment
-   * @param z,y,z Point for which transformation form odom has to be found
-   * @return None
+   * @brief Calculates transforms for charging docks in rviz environment
+   * @param x,y,z Point for which transformation form camera link has to be found
+   * @return tr Transform of the point with respect to camera frame
    */
-  void broadcastTf(float x, float y, float z);
+  tf::Transform broadcastTflocal(float x, float y, float z);
+  /**
+   * @brief Calculates transforms for charging docks in rviz environment
+   * @param Transform Transform form odom to camera link
+   * @param x,y,z Point for which transformation form odom has to be found
+   * @return tr Transform of the point with respect to camera frame
+   */
+  tf::Transform broadcastTfodom(tf::StampedTransform transform, float &x,
+                                float &y, float &z);
   /**
    * @brief Constructor for the class
    * @param nh Node handle
    * @return None
    */
-  ChargeDockDetection(ros::NodeHandle _nh);
+  ChargeDockDetection();
   /**
    * @brief Destructor for the class
    * @param None
