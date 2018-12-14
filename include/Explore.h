@@ -18,8 +18,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -30,19 +30,18 @@
  * SOFTWARE.
  */
 
+#ifndef INCLUDE_EXPLORE_H_
+#define INCLUDE_EXPLORE_H_
 
-#ifndef _INCLUDE_GAZEBOT_EXPLORE_EXPLORE_H_
-#define _INCLUDE_GAZEBOT_EXPLORE_EXPLORE_H_
-
-#include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
-#include <sensor_msgs/LaserScan.h>
 #include <nav_msgs/OccupancyGrid.h>
+#include <ros/ros.h>
+#include <sensor_msgs/LaserScan.h>
 #include <tf/transform_listener.h>
 
-#include <iostream>
-#include <cmath>
 #include <algorithm>
+#include <cmath>
+#include <iostream>
 #include <stack>
 
 /**
@@ -50,14 +49,13 @@
  */
 
 typedef enum _ROBOT_MOVEMENT {
-    STOP = 0,
-    FORWARD,
-    BACKWARD,
-    TURN_LEFT,
-    TURN_RIGHT,
-    GO_RIGHT,
-    GO_LEFT
-
+  STOP = 0,
+  FORWARD,
+  BACKWARD,
+  TURN_LEFT,
+  TURN_RIGHT,
+  GO_RIGHT,
+  GO_LEFT
 } ROBOT_MOVEMENT;
 
 /**
@@ -71,27 +69,24 @@ struct point {
 
 class Explore {
  public:
-  ros::NodeHandle n;
-  explicit Explore(ros::NodeHandle &n);
+  Explore();
   ~Explore();
-/**
- * @brief function to set the movement of the robot
- * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
- */
-  bool robot_move (const ROBOT_MOVEMENT move_type);
-/**
- * @brief callback function for receiving the laser scan data
- * @param pointer to laser scan data
- */
-  void getLaserData (const sensor_msgs::LaserScan::ConstPtr &scan_msg);
-/**
- * @brief callback function for receiving the map data
- * @param pointer to occupancy grid data
- */
-  void getMapData (const nav_msgs::OccupancyGrid::ConstPtr &msg);
-  ros::Publisher motor_command_publisher;
-  ros::Subscriber laser_subscriber;
-  ros::Subscriber map_subscriber;
+  /**
+   * @brief function to set the movement of the robot
+   * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
+   */
+  bool robot_move(const ROBOT_MOVEMENT move_type);
+  /**
+   * @brief callback function for receiving the laser scan data
+   * @param pointer to laser scan data
+   */
+  geometry_msgs::Twist getLaserData(
+      const sensor_msgs::LaserScan::ConstPtr &scan_msg);
+  /**
+   * @brief callback function for receiving the map data
+   * @param pointer to occupancy grid data
+   */
+  void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
   sensor_msgs::LaserScan laser_msg;
   nav_msgs::OccupancyGrid map_msg;
   geometry_msgs::Twist motor_command;
@@ -100,4 +95,4 @@ class Explore {
   bool crashed = false;
 };
 
-#endif //   _INCLUDE_GAZEBOT_WALKER_WALKER_H_
+#endif  // INCLUDE_EXPLORE_H_
