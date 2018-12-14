@@ -1,0 +1,9 @@
+<launch>
+	<arg name="world" default="Room_Volta"/>
+	<include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+		<arg name="world_file" value="$(find volta)/worlds/$(arg world).world"/>
+	</include>
+	<node pkg="gmapping" type="slam_gmapping" name="gmapping"/>
+	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find volta)/rviz/rviz_config.rviz"/>	
+	<node pkg="volta" type="volta" name="volta"/>
+</launch>
