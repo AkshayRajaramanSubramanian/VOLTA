@@ -3,19 +3,18 @@
 [![Build Status](https://travis-ci.org/bsaisudh/VOLTA.svg?branch=master)](https://travis-ci.org/bsaisudh/VOLTA)
 [![Coverage Status](https://coveralls.io/repos/github/bsaisudh/VOLTA/badge.svg)](https://coveralls.io/github/bsaisudh/VOLTA)
 
-##Overview
+## Overview
 With increase in use of swarm of robots and each robot being limited by its power
-capability, it is necessary for these robots to plan is charging cycle and recharge by
-itself. With the above motivation, this project tries to mitigate the problem. The project
-involves SLAM of a indoor space and marking the robot charging dock. This information
+capability, it is necessary for these robots to plan their charging cycle and recharge by
+themselves. With the above motivation, this project tries to mitigate the problem. The project
+involves SLAM of an indoor space and marking the robot charging docks. This information
 can be shared among a swarm of robots which can utilize the information at the state of
 necessity.
-The turtlebot-type robot will use monocular camera for localization and mapping the
+The turtlebot will use the kinect camera for localization and mapping the
 indoor space. Each charging dock will have a sign board which will be used by the robot
 for identification using image processing techniques and will be marked.
 The packages will be developed with Test Driven Development, Pair programming and
 agile development strategies to ensure accurate intended operation of the robot.
-The software development process can be subdivided into four tasks: Charging station
 
 ## Authors
 
