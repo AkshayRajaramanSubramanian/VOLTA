@@ -35,6 +35,8 @@
 
 #include "../include/ChargeDockDetection.h"
 #include "../include/ROSChargeDockDetection.h"
+#include "../include/Explore.h"
+#include "../include/ROSExplore.h"
 
 /**
  * @brief Main block that runs the node.
@@ -48,7 +50,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "volta");
   ros::NodeHandle nh;
   ROSChargeDockDetection chargeDockdetect(nh);
-  //Explore explore(nh);
+  ROSExplore explore(nh);
   ros::spin();
   return 0;
 }
