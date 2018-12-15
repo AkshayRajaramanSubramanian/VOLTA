@@ -276,7 +276,6 @@ if (CATKIN_ENABLE_TESTING)
   test/main.cpp
   test/ExploreTest.cpp
   test/ROSExploreTest.cpp
-  test/voltaTest.cpp
   test/ROSChargeDockTest.cpp
   test/ChargeDockTest.cpp
   test/ROSChargeDockDetectionTest.cpp
