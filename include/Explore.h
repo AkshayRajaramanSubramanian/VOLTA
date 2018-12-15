@@ -69,12 +69,6 @@ struct point {
 
 class Explore {
  public:
-  sensor_msgs::LaserScan laser_msg;
-  nav_msgs::OccupancyGrid map_msg;
-  geometry_msgs::Twist motor_command;
-  bool following_wall = false;
-  bool thats_a_door = false;
-  bool crashed = false;
   Explore();
   ~Explore();
   /**
@@ -93,6 +87,13 @@ class Explore {
    * @param pointer to occupancy grid data
    */
   void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
+  sensor_msgs::LaserScan laser_msg;
+  nav_msgs::OccupancyGrid map_msg;
+  geometry_msgs::Twist motor_command;
+  bool following_wall = false;
+  bool thats_a_door = false;
+  bool crashed = false;
+  bool explored = false;
 };
 
 #endif  // INCLUDE_EXPLORE_H_
