@@ -32,18 +32,14 @@
  */
 #include "../include/ROSExplore.h"
 
-/**
- * @brief Wrapper node for the Explore class
- * @param NodeHandle n
- */
-
-ROSExplore::ROSExplore(ros::NodeHandle &n) : n(n) {
+ROSExplore::ROSExplore(ros::NodeHandle &n)
+    : n(n) {
   // publish motor commands
-  motorCommandPublisher =
-      n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 100);
+  motorCommandPublisher = n.advertise<geometry_msgs::Twist>(
+      "/mobile_base/commands/velocity", 100);
   // subscribe to laser data
-  laserSubscriber =
-      n.subscribe("/scan", 1000, &ROSExplore::getLaserDataWrapper, this);
+  laserSubscriber = n.subscribe("/scan", 1000, &ROSExplore::getLaserDataWrapper,
+                                this);
   // subscribe to map data
   mapSubscriber = n.subscribe("/map", 1000, &Explore::getMapData, &explore);
 }
@@ -55,4 +51,5 @@ void ROSExplore::getLaserDataWrapper(
   motorCommandPublisher.publish(explore.motorCommand);
   usleep(10);
 }
-ROSExplore::~ROSExplore() {}
+ROSExplore::~ROSExplore() {
+}

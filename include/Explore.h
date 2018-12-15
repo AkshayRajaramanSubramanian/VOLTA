@@ -69,30 +69,40 @@ struct point {
 
 class Explore {
  public:
-  Explore();
-  ~Explore();
-  /**
-   * @brief function to set the movement of the robot
-   * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
-   */
-  bool robotMove(const ROBOT_MOVEMENT move_type);
-  /**
-   * @brief callback function for receiving the laser scan data
-   * @param pointer to laser scan data
-   */
-  geometry_msgs::Twist getLaserData(
-      const sensor_msgs::LaserScan scan_msg);
-  /**
-   * @brief callback function for receiving the map data
-   * @param pointer to occupancy grid data
-   */
-  void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
   sensor_msgs::LaserScan laserMsg;
   nav_msgs::OccupancyGrid mapMsg;
   geometry_msgs::Twist motorCommand;
   bool followingWall = false;
   bool thatsADoor = false;
   bool crashed = false;
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
+  Explore();
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
+  ~Explore();
+  /**
+   * @brief function to set the movement of the robot
+   * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
+   * @return bool True if the command has to be bublished or not
+   */
+  bool robotMove(const ROBOT_MOVEMENT move_type);
+  /**
+   * @brief callback function for receiving the laser scan data
+   * @param pointer to laser scan data
+   */
+  geometry_msgs::Twist getLaserData(const sensor_msgs::LaserScan scan_msg);
+  /**
+   * @brief callback function for receiving the map data
+   * @param pointer to occupancy grid data
+   */
+  void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
 };
 
 #endif  // INCLUDE_EXPLORE_H_

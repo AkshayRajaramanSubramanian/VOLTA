@@ -37,6 +37,9 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 
+/**
+ * @brief Wrapper node for the Explore class
+ */
 class ROSExplore {
  public:
   ros::NodeHandle n;
@@ -44,9 +47,24 @@ class ROSExplore {
   ros::Publisher motorCommandPublisher;
   ros::Subscriber laserSubscriber;
   ros::Subscriber mapSubscriber;
+  /**
+   * @brief Constructor for the class
+   * @param Node Handle
+   * @return None
+   */
   explicit ROSExplore(ros::NodeHandle &n);
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
   virtual ~ROSExplore();
-  void getLaserDataWrapper(const sensor_msgs::LaserScan::ConstPtr &scan_msg);
+  /**
+   * @brief Wrapper class for getLaserData if explore class
+   * @param scanMssg Laser scan data
+   * @return None
+   */
+  void getLaserDataWrapper(const sensor_msgs::LaserScan::ConstPtr &scanMssg);
 };
 
 #endif /* INCLUDE_ROSEXPLORE_H_ */
