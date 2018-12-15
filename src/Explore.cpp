@@ -99,8 +99,8 @@ bool Explore::robot_move(const ROBOT_MOVEMENT move_type) {
  */
 
 geometry_msgs::Twist Explore::getLaserData(
-    const sensor_msgs::LaserScan::ConstPtr &scan_msg) {
-  laser_msg = *scan_msg;
+    const sensor_msgs::LaserScan laser_msg) {
+  //laser_msg = *scan_msg;
   std::vector<float> laser_ranges;
   // get laser scan range
   laser_ranges = laser_msg.ranges;

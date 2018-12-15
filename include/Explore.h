@@ -81,7 +81,7 @@ class Explore {
    * @param pointer to laser scan data
    */
   geometry_msgs::Twist getLaserData(
-      const sensor_msgs::LaserScan::ConstPtr &scan_msg);
+      const sensor_msgs::LaserScan scan_msg);
   /**
    * @brief callback function for receiving the map data
    * @param pointer to occupancy grid data

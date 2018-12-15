@@ -7,9 +7,10 @@
 #include <ros/console.h>
 
 #include "../include/Explore.h"
+//#include "../include/ROSExplore.h"
 
 #include "gtest/gtest.h"
-#include "ros/ros.h"
+//#include "ros/ros.h"
 #include "ros/service_client.h"
 #include "std_srvs/Trigger.h"
 #include "std_msgs/String.h"
@@ -27,8 +28,9 @@
 
 TEST(robot_move, stop) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  //ROSExplore exp(nh);
+  Explore ex;
   // Act
   ex.robot_move(STOP);
   // Test
@@ -38,8 +40,8 @@ TEST(robot_move, stop) {
 
 TEST(robot_move, forward) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(FORWARD);
   // Test
@@ -49,41 +51,41 @@ TEST(robot_move, forward) {
 
 TEST(robot_move, backward) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(BACKWARD);
   // Test
   EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(-0.75, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(-0.5, ex.motor_command.linear.x);
 }
 
 TEST(robot_move, trun_left) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(TURN_LEFT);
   // Test
-  EXPECT_DOUBLE_EQ(1.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(0.5, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
 }
 
 TEST(robot_move, turn_right) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(TURN_RIGHT);
   // Test
-  EXPECT_DOUBLE_EQ(-1.0, ex.motor_command.angular.z);
+  EXPECT_DOUBLE_EQ(-0.5, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
 }
 
 TEST(robot_move, go_right) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(GO_RIGHT);
   // Test
@@ -93,14 +95,15 @@ TEST(robot_move, go_right) {
 
 TEST(robot_move, go_left) {
   // Assert
-  ros::NodeHandle nh;
-  Explore ex(nh);
+  //ros::NodeHandle nh;
+  Explore ex;
   // Act
   ex.robot_move(GO_LEFT);
   // Test
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.angular.z);
   EXPECT_DOUBLE_EQ(0.25, ex.motor_command.linear.x);
 }
+
 /*
 void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
 
@@ -116,7 +119,7 @@ void callbackMotorCommand(const geometry_msgs::Twist &motor_command) {
  &callbackMotorCommand);
  }
  */
-
+/*
 class ExploreTest {
  public:
   ros::Subscriber msub, lsub;
@@ -182,6 +185,7 @@ TEST(ExploreTest, messageValue) {
   EXPECT_DOUBLE_EQ(-0.25, t.mCmd.angular.z);
   EXPECT_DOUBLE_EQ(0.25, t.mCmd.linear.x);
 }
+*/
 
 TEST(ExploreTest, backward) {
   sensor_msgs::LaserScan laserMsg;
@@ -193,15 +197,11 @@ TEST(ExploreTest, backward) {
   laserMsg.ranges = range;
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
-
-  ExploreTest t;
-  Explore ex(t.nh);
-  t.createLaserPublisher();
-  t.lpub.publish(laserMsg);
-  ros::Duration(0.5).sleep();
-  ros::spinOnce();
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(-0.75, ex.motor_command.linear.x);
+  Explore ex;
+  geometry_msgs::Twist motorCmd;
+  motorCmd = ex.getLaserData(laserMsg);
+  EXPECT_DOUBLE_EQ(0.0, motorCmd.angular.z);
+  EXPECT_DOUBLE_EQ(-0.5, motorCmd.linear.x);
 }
 
 TEST(ExploreTest, forward) {
@@ -214,15 +214,11 @@ TEST(ExploreTest, forward) {
   laserMsg.ranges = range;
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
-
-  ExploreTest t;
-  Explore ex(t.nh);
-  t.createLaserPublisher();
-  t.lpub.publish(laserMsg);
-  ros::Duration(0.5).sleep();
-  ros::spinOnce();
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.5, ex.motor_command.linear.x);
+  Explore ex;
+  geometry_msgs::Twist motorCmd;
+  motorCmd = ex.getLaserData(laserMsg);
+  EXPECT_DOUBLE_EQ(0.0, motorCmd.angular.z);
+  EXPECT_DOUBLE_EQ(0.5, motorCmd.linear.x);
 }
 
 TEST(ExploreTest, turnLeft) {
@@ -235,15 +231,11 @@ TEST(ExploreTest, turnLeft) {
   laserMsg.ranges = range;
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
-
-  ExploreTest t;
-  Explore ex(t.nh);
-  t.createLaserPublisher();
-  t.lpub.publish(laserMsg);
-  ros::Duration(0.5).sleep();
-  ros::spinOnce();
-  EXPECT_DOUBLE_EQ(1.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  Explore ex;
+  geometry_msgs::Twist motorCmd;
+  motorCmd = ex.getLaserData(laserMsg);
+  EXPECT_DOUBLE_EQ(0.5, motorCmd.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, motorCmd.linear.x);
 }
 
 TEST(ExploreTest, turnRight) {
@@ -256,35 +248,28 @@ TEST(ExploreTest, turnRight) {
   laserMsg.ranges = range;
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
-
-  ExploreTest t;
-  Explore ex(t.nh);
-  t.createLaserPublisher();
-  t.lpub.publish(laserMsg);
-  ros::Duration(0.5).sleep();
-  ros::spinOnce();
-  EXPECT_DOUBLE_EQ(-1.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  Explore ex;
+  geometry_msgs::Twist motorCmd;
+  motorCmd = ex.getLaserData(laserMsg);
+  EXPECT_DOUBLE_EQ(-0.5, motorCmd.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, motorCmd.linear.x);
 }
-/*
+
 TEST(ExploreTest, goRight) {
   sensor_msgs::LaserScan laserMsg;
   std::vector<float> range;
-  range.push_back(0.4);
-  range.push_back(0.4);
-  range.push_back(0.4);
-  range.push_back(6.0);
+  range.push_back(1.4);
+  range.push_back(1.6);
+  range.push_back(5.4);
+  range.push_back(5.6);
   laserMsg.ranges = range;
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
-
-  ExploreTest t;
-  Explore ex(t.nh);
-  t.createLaserPublisher();
-  t.lpub.publish(laserMsg);
-  ros::Duration(1.0).sleep();
-  ros::spinOnce();
-  EXPECT_DOUBLE_EQ(-1.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  Explore ex;
+  ex.thats_a_door=true;
+  geometry_msgs::Twist motorCmd;
+  motorCmd = ex.getLaserData(laserMsg);
+  EXPECT_DOUBLE_EQ(-0.25, motorCmd.angular.z);
+  EXPECT_DOUBLE_EQ(0.25, motorCmd.linear.x);
 }
-*/
+

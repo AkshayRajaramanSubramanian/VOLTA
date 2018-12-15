@@ -38,7 +38,8 @@
 /**
  * @brief Dummy test
  */
+/*
 TEST(talkerNodeService, customMessageExistance) {
 
 }
-
+*/

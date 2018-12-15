@@ -49,7 +49,8 @@ ROSExplore::ROSExplore(ros::NodeHandle &n) : n(n) {
 }
 void ROSExplore::getLaserDataWrapper(
     const sensor_msgs::LaserScan::ConstPtr &scan_msg) {
-  geometry_msgs::Twist motor_command = explore.getLaserData(scan_msg);
+  sensor_msgs::LaserScan scanMsg = *scan_msg;
+  geometry_msgs::Twist motor_command = explore.getLaserData(scanMsg);
   // publish motor command
   motor_command_publisher.publish(explore.motor_command);
   usleep(10);
