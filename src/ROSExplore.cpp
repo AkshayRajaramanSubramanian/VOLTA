@@ -32,26 +32,24 @@
  */
 #include "../include/ROSExplore.h"
 
-/**
- * @brief Wrapper node for the Explore class
- * @param NodeHandle n
- */
-
-ROSExplore::ROSExplore(ros::NodeHandle &n) : n(n) {
+ROSExplore::ROSExplore(ros::NodeHandle &n)
+    : n(n) {
   // publish motor commands
-  motor_command_publisher =
-      n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 100);
+  motorCommandPublisher = n.advertise<geometry_msgs::Twist>(
+      "/mobile_base/commands/velocity", 100);
   // subscribe to laser data
-  laser_subscriber =
-      n.subscribe("/scan", 1000, &ROSExplore::getLaserDataWrapper, this);
+  laserSubscriber = n.subscribe("/scan", 1000, &ROSExplore::getLaserDataWrapper,
+                                this);
   // subscribe to map data
-  map_subscriber = n.subscribe("/map", 1000, &Explore::getMapData, &explore);
+  mapSubscriber = n.subscribe("/map", 1000, &Explore::getMapData, &explore);
 }
 void ROSExplore::getLaserDataWrapper(
-    const sensor_msgs::LaserScan::ConstPtr &scan_msg) {
-  geometry_msgs::Twist motor_command = explore.getLaserData(scan_msg);
+    const sensor_msgs::LaserScan::ConstPtr &scanMssg) {
+  sensor_msgs::LaserScan scanMsg = *scanMssg;
+  geometry_msgs::Twist motor_command = explore.getLaserData(scanMsg);
   // publish motor command
-  motor_command_publisher.publish(explore.motor_command);
+  motorCommandPublisher.publish(explore.motorCommand);
   usleep(10);
 }
-ROSExplore::~ROSExplore() {}
+ROSExplore::~ROSExplore() {
+}

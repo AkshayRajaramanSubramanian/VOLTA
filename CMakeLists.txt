@@ -274,6 +274,8 @@ if (CATKIN_ENABLE_TESTING)
   ${PROJECT_NAME}_test
   test/volta_test.test
   test/main.cpp
+  test/ExploreTest.cpp
+  test/ROSExploreTest.cpp
   test/voltaTest.cpp
   test/ROSChargeDockTest.cpp
   test/ChargeDockTest.cpp
@@ -283,8 +285,8 @@ if (CATKIN_ENABLE_TESTING)
   src/ROSChargeDockDetection.cpp
   src/ChargeDockDetection.cpp
   src/ROSChargeDock.cpp
-#  test/ExploreTest.cpp
-#  src/Explore.cpp
+  src/Explore.cpp
+  src/ROSExplore.cpp
   )
   target_link_libraries(
   ${PROJECT_NAME}_test

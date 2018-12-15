@@ -69,31 +69,41 @@ struct point {
 
 class Explore {
  public:
+  sensor_msgs::LaserScan laserMsg;
+  nav_msgs::OccupancyGrid mapMsg;
+  geometry_msgs::Twist motorCommand;
+  bool explored = false;
+  bool followingWall = false;
+  bool thatsADoor = false;
+  bool crashed = false;
+  /**
+   * @brief Constructor for the class
+   * @param None
+   * @return None
+   */
   Explore();
+  /**
+   * @brief Destructor for the class
+   * @param None
+   * @return None
+   */
   ~Explore();
   /**
    * @brief function to set the movement of the robot
    * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
+   * @return bool True if the command has to be bublished or not
    */
-  bool robot_move(const ROBOT_MOVEMENT move_type);
+  bool robotMove(const ROBOT_MOVEMENT moveType);
   /**
    * @brief callback function for receiving the laser scan data
    * @param pointer to laser scan data
    */
-  geometry_msgs::Twist getLaserData(
-      const sensor_msgs::LaserScan::ConstPtr &scan_msg);
+  geometry_msgs::Twist getLaserData(const sensor_msgs::LaserScan scanMsg);
   /**
    * @brief callback function for receiving the map data
    * @param pointer to occupancy grid data
    */
   void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
-  sensor_msgs::LaserScan laser_msg;
-  nav_msgs::OccupancyGrid map_msg;
-  geometry_msgs::Twist motor_command;
-  bool following_wall = false;
-  bool thats_a_door = false;
-  bool crashed = false;
-  bool explored = false;
 };
 
 #endif  // INCLUDE_EXPLORE_H_
