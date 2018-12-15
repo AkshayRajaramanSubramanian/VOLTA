@@ -98,7 +98,7 @@ TEST(ExploreTest, messageExist) {
   ExploreTest t;
   ROSExplore ex(t.nh);
   //ex.robot_move(GO_LEFT);
-  ros::Duration(0.5).sleep();
+  ros::Duration(2.0).sleep();
   ros::spinOnce();
   ASSERT_TRUE(t.mcallback);
 }
