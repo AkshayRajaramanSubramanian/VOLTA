@@ -50,6 +50,7 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "volta");
   ros::NodeHandle nh;
   ROSChargeDockDetection chargeDockdetect(nh);
+  ros::Duration(2).sleep();
   ROSExplore explore(nh);
   ros::spin();
   return 0;
