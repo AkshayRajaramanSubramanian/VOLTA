@@ -75,7 +75,7 @@ class Explore {
    * @brief function to set the movement of the robot
    * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
    */
-  bool robot_move(const ROBOT_MOVEMENT move_type);
+  bool robotMove(const ROBOT_MOVEMENT move_type);
   /**
    * @brief callback function for receiving the laser scan data
    * @param pointer to laser scan data
@@ -87,11 +87,11 @@ class Explore {
    * @param pointer to occupancy grid data
    */
   void getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg);
-  sensor_msgs::LaserScan laser_msg;
-  nav_msgs::OccupancyGrid map_msg;
-  geometry_msgs::Twist motor_command;
-  bool following_wall = false;
-  bool thats_a_door = false;
+  sensor_msgs::LaserScan laserMsg;
+  nav_msgs::OccupancyGrid mapMsg;
+  geometry_msgs::Twist motorCommand;
+  bool followingWall = false;
+  bool thatsADoor = false;
   bool crashed = false;
 };
 

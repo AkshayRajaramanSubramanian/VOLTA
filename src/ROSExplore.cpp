@@ -39,20 +39,20 @@
 
 ROSExplore::ROSExplore(ros::NodeHandle &n) : n(n) {
   // publish motor commands
-  motor_command_publisher =
+  motorCommandPublisher =
       n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 100);
   // subscribe to laser data
-  laser_subscriber =
+  laserSubscriber =
       n.subscribe("/scan", 1000, &ROSExplore::getLaserDataWrapper, this);
   // subscribe to map data
-  map_subscriber = n.subscribe("/map", 1000, &Explore::getMapData, &explore);
+  mapSubscriber = n.subscribe("/map", 1000, &Explore::getMapData, &explore);
 }
 void ROSExplore::getLaserDataWrapper(
-    const sensor_msgs::LaserScan::ConstPtr &scan_msg) {
-  sensor_msgs::LaserScan scanMsg = *scan_msg;
+    const sensor_msgs::LaserScan::ConstPtr &scanMssg) {
+  sensor_msgs::LaserScan scanMsg = *scanMssg;
   geometry_msgs::Twist motor_command = explore.getLaserData(scanMsg);
   // publish motor command
-  motor_command_publisher.publish(explore.motor_command);
+  motorCommandPublisher.publish(explore.motorCommand);
   usleep(10);
 }
 ROSExplore::~ROSExplore() {}

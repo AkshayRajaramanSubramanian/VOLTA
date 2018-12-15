@@ -44,49 +44,49 @@
 #include "sensor_msgs/LaserScan.h"
 #include "tf/transform_listener.h"
 
-#define PI 3.141592
-
 /**
  * @brief constructor for initializing Explore object
  * @param NodeHandle n
  */
 
-Explore::Explore() {}
+Explore::Explore() {
+}
 
 /**
  * @brief destructor function
  */
 
-Explore::~Explore() {}
+Explore::~Explore() {
+}
 
 /**
  * @brief function to set the movement of the robot
  * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
  */
 
-bool Explore::robot_move(const ROBOT_MOVEMENT move_type) {
+bool Explore::robotMove(const ROBOT_MOVEMENT move_type) {
   // set motor commands for each scenario
   if (move_type == STOP) {
-    motor_command.angular.z = 0.0;
-    motor_command.linear.x = 0.0;
+    motorCommand.angular.z = 0.0;
+    motorCommand.linear.x = 0.0;
   } else if (move_type == FORWARD) {
-    motor_command.angular.z = 0.0;
-    motor_command.linear.x = 0.5;
+    motorCommand.angular.z = 0.0;
+    motorCommand.linear.x = 0.5;
   } else if (move_type == BACKWARD) {
-    motor_command.linear.x = -0.5;
-    motor_command.angular.z = 0.0;
+    motorCommand.linear.x = -0.5;
+    motorCommand.angular.z = 0.0;
   } else if (move_type == TURN_LEFT) {
-    motor_command.linear.x = 0.0;
-    motor_command.angular.z = 0.5;
+    motorCommand.linear.x = 0.0;
+    motorCommand.angular.z = 0.5;
   } else if (move_type == TURN_RIGHT) {
-    motor_command.linear.x = 0.0;
-    motor_command.angular.z = -0.5;
+    motorCommand.linear.x = 0.0;
+    motorCommand.angular.z = -0.5;
   } else if (move_type == GO_RIGHT) {
-    motor_command.linear.x = 0.25;
-    motor_command.angular.z = -0.25;
+    motorCommand.linear.x = 0.25;
+    motorCommand.angular.z = -0.25;
   } else if (move_type == GO_LEFT) {
-    motor_command.linear.x = 0.25;
-    motor_command.angular.z = 0.25;
+    motorCommand.linear.x = 0.25;
+    motorCommand.angular.z = 0.25;
   } else {
     return false;
   }
@@ -99,83 +99,83 @@ bool Explore::robot_move(const ROBOT_MOVEMENT move_type) {
  */
 
 geometry_msgs::Twist Explore::getLaserData(
-    const sensor_msgs::LaserScan laser_msg) {
-  //laser_msg = *scan_msg;
-  std::vector<float> laser_ranges;
+    const sensor_msgs::LaserScan laserMsg) {
+  std::vector<float> laserRanges;
   // get laser scan range
-  laser_ranges = laser_msg.ranges;
-  size_t range_size = laser_ranges.size();
-  float left_side = 0.0, right_side = 0.0;
+  laserRanges = laserMsg.ranges;
+  size_t rangeSize = laserRanges.size();
+  float leftSide = 0.0;
+  float rightSide = 0.0;
   // get maximum and minimum ranges for laser scan
-  float range_min = laser_msg.range_max;
-  float range_max = laser_msg.range_min;
-  int nan_count = 0;
-  for (size_t i = 0; i < range_size; i++) {
-    if (laser_ranges[i] < range_min) {
-      range_min = laser_ranges[i];
+  float rangeMin = laserMsg.range_max;
+  float rangeMax = laserMsg.range_min;
+  int nanCount = 0;
+  for (size_t i = 0; i < rangeSize; i++) {
+    if (laserRanges[i] < rangeMin) {
+      rangeMin = laserRanges[i];
     }
 
-    if (std::isnan(laser_ranges[i])) {
-      nan_count++;
+    if (std::isnan (laserRanges[i])) {
+      nanCount++;
     }
-    if (i < range_size / 4) {
-      if (laser_ranges[i] > range_max) {
-        range_max = laser_ranges[i];
+    if (i < rangeSize / 4) {
+      if (laserRanges[i] > rangeMax) {
+        rangeMax = laserRanges[i];
       }
     }
 
-    if (i > range_size / 2) {
-      left_side += laser_ranges[i];
+    if (i > rangeSize / 2) {
+      leftSide += laserRanges[i];
     } else {
-      right_side += laser_ranges[i];
+      rightSide += laserRanges[i];
     }
   }
 
-  if (nan_count > (range_size * 0.9) || laser_ranges[range_size / 2] < 0.25) {
+  if (nanCount > (rangeSize * 0.9) || laserRanges[rangeSize / 2] < 0.25) {
     crashed = true;
   } else {
     crashed = false;
   }
   if (!crashed) {
-    if (range_min <= 1 && !thats_a_door) {
-      following_wall = true;
+    if (rangeMin <= 1 && !thatsADoor) {
+      followingWall = true;
       crashed = false;
       // stop the robot before taking a decision to move
-      robot_move(STOP);
+      robotMove(STOP);
 
-      if (left_side >= right_side) {
+      if (leftSide >= rightSide) {
         // turn the robot to the right
-        robot_move(TURN_RIGHT);
+        robotMove(TURN_RIGHT);
       } else {
         // turn the robot to the left
-        robot_move(TURN_LEFT);
+        robotMove(TURN_LEFT);
       }
     } else {
-      robot_move(STOP);
-      if (following_wall) {
-        if (range_max >= 1.5) {
-          thats_a_door = true;
-          following_wall = false;
+      robotMove(STOP);
+      if (followingWall) {
+        if (rangeMax >= 1.5) {
+          thatsADoor = true;
+          followingWall = false;
         }
       }
-      if (thats_a_door) {
-        if (laser_ranges[0] <= 1) {
-          thats_a_door = false;
+      if (thatsADoor) {
+        if (laserRanges[0] <= 1) {
+          thatsADoor = false;
         } else {
           // move the robot to the right
-          robot_move(GO_RIGHT);
+          robotMove(GO_RIGHT);
         }
 
       } else {
         // move the robot forward
-        robot_move(FORWARD);
+        robotMove(FORWARD);
       }
     }
   } else {
     // move the robot backwards
-    robot_move(BACKWARD);
+    robotMove(BACKWARD);
   }
-  return motor_command;
+  return motorCommand;
 }
 
 /**
@@ -185,11 +185,11 @@ geometry_msgs::Twist Explore::getLaserData(
 
 void Explore::getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
   const bool chatty_map = true;
-  map_msg = *msg;
-  double map_width = map_msg.info.width;
-  double map_height = map_msg.info.width;
-  double map_origin_x = map_msg.info.origin.position.x;
-  double map_origin_y = map_msg.info.origin.position.y;
-  double map_orientation = acos(map_msg.info.origin.orientation.z);
-  std::vector<signed char> map = map_msg.data;
+  mapMsg = *msg;
+  double map_width = mapMsg.info.width;
+  double map_height = mapMsg.info.width;
+  double map_origin_x = mapMsg.info.origin.position.x;
+  double map_origin_y = mapMsg.info.origin.position.y;
+  double map_orientation = acos(mapMsg.info.origin.orientation.z);
+  std::vector<signed char> map = mapMsg.data;
 }

@@ -41,9 +41,9 @@ class ROSExplore {
  public:
   ros::NodeHandle n;
   Explore explore;
-  ros::Publisher motor_command_publisher;
-  ros::Subscriber laser_subscriber;
-  ros::Subscriber map_subscriber;
+  ros::Publisher motorCommandPublisher;
+  ros::Subscriber laserSubscriber;
+  ros::Subscriber mapSubscriber;
   explicit ROSExplore(ros::NodeHandle &n);
   virtual ~ROSExplore();
   void getLaserDataWrapper(const sensor_msgs::LaserScan::ConstPtr &scan_msg);

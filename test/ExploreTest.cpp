@@ -4,71 +4,58 @@
  *  Created on: Dec 5, 2018
  *      Author: bala
  */
+#include <cmath>
+#include <algorithm>
 #include <ros/console.h>
-
 #include "../include/Explore.h"
-//#include "../include/ROSExplore.h"
-
 #include "gtest/gtest.h"
-//#include "ros/ros.h"
 #include "ros/service_client.h"
 #include "std_srvs/Trigger.h"
 #include "std_msgs/String.h"
-
-#include <math.h>
 #include "geometry_msgs/Twist.h"
 #include "sensor_msgs/LaserScan.h"
 #include "nav_msgs/OccupancyGrid.h"
 #include "tf/transform_listener.h"
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
-#include <stack>
 
 TEST(robot_move, stop) {
   // Assert
-  //ros::NodeHandle nh;
-  //ROSExplore exp(nh);
   Explore ex;
   // Act
-  ex.robot_move(STOP);
+  ex.robotMove(STOP);
   // Test
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, forward) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(FORWARD);
+  ex.robotMove(FORWARD);
   // Test
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.5, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.5, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, backward) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(BACKWARD);
+  ex.robotMove(BACKWARD);
   // Test
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(-0.5, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(-0.5, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, trun_left) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(TURN_LEFT);
+  ex.robotMove(TURN_LEFT);
   // Test
-  EXPECT_DOUBLE_EQ(0.5, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(0.5, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, turn_right) {
@@ -76,32 +63,30 @@ TEST(robot_move, turn_right) {
   //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(TURN_RIGHT);
+  ex.robotMove(TURN_RIGHT);
   // Test
-  EXPECT_DOUBLE_EQ(-0.5, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.0, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(-0.5, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.0, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, go_right) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(GO_RIGHT);
+  ex.robotMove(GO_RIGHT);
   // Test
-  EXPECT_DOUBLE_EQ(-0.25, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.25, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(-0.25, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.25, ex.motorCommand.linear.x);
 }
 
 TEST(robot_move, go_left) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
-  ex.robot_move(GO_LEFT);
+  ex.robotMove(GO_LEFT);
   // Test
-  EXPECT_DOUBLE_EQ(0.25, ex.motor_command.angular.z);
-  EXPECT_DOUBLE_EQ(0.25, ex.motor_command.linear.x);
+  EXPECT_DOUBLE_EQ(0.25, ex.motorCommand.angular.z);
+  EXPECT_DOUBLE_EQ(0.25, ex.motorCommand.linear.x);
 }
 
 /*
@@ -266,7 +251,7 @@ TEST(ExploreTest, goRight) {
   laserMsg.range_max = 10.0;
   laserMsg.range_min = 0.449999988079;
   Explore ex;
-  ex.thats_a_door=true;
+  ex.thatsADoor=true;
   geometry_msgs::Twist motorCmd;
   motorCmd = ex.getLaserData(laserMsg);
   EXPECT_DOUBLE_EQ(-0.25, motorCmd.angular.z);
