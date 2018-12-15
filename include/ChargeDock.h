@@ -47,7 +47,7 @@
 class ChargeDock {
   //ros::NodeHandle n;
   int id = 0;   // <! Marker ID
-  std::vector<cv::Point3f> centers;   // <! Store all docking points
+
  public:
   /**
    * @brief returns the charging dock information on request
@@ -73,6 +73,7 @@ class ChargeDock {
    * @return None
    */
   virtual ~ChargeDock();
+  std::vector<cv::Point3f> centers;   // <! Store all docking points
 };
 
 #endif /* VOLTA_SRC_CHARGEDOCK_H_ */
