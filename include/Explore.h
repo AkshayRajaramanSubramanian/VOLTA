@@ -72,6 +72,7 @@ class Explore {
   sensor_msgs::LaserScan laserMsg;
   nav_msgs::OccupancyGrid mapMsg;
   geometry_msgs::Twist motorCommand;
+  bool explored = false;
   bool followingWall = false;
   bool thatsADoor = false;
   bool crashed = false;
@@ -92,12 +93,12 @@ class Explore {
    * @param movement type [LEFT, RIGHT, FOWARD, REVERSE etc]
    * @return bool True if the command has to be bublished or not
    */
-  bool robotMove(const ROBOT_MOVEMENT move_type);
+  bool robotMove(const ROBOT_MOVEMENT moveType);
   /**
    * @brief callback function for receiving the laser scan data
    * @param pointer to laser scan data
    */
-  geometry_msgs::Twist getLaserData(const sensor_msgs::LaserScan scan_msg);
+  geometry_msgs::Twist getLaserData(const sensor_msgs::LaserScan scanMsg);
   /**
    * @brief callback function for receiving the map data
    * @param pointer to occupancy grid data

@@ -6,8 +6,9 @@
       type="volta"
       args="$(arg rate)"
     />
-<node pkg="rosbag" type="play" name="player" args="--loop $(find volta)/test/TestROSExploreTest.bag"/>
-    <test
+  <node pkg="rosbag" type="play" name="player" args="--loop $(find volta)/test/TestROSExploreTest.bag"/>
+  <node pkg="rosbag" type="play" name="player" args="--loop $(find volta)/test/imageTest.bag"/>
+  <test
       test-name="voltaTest"
       pkg="volta"
       type="volta_test"

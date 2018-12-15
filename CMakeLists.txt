@@ -276,12 +276,22 @@ if (CATKIN_ENABLE_TESTING)
   test/main.cpp
   test/ExploreTest.cpp
   test/ROSExploreTest.cpp
+  test/voltaTest.cpp
+  test/ROSChargeDockTest.cpp
+  test/ChargeDockTest.cpp
+  test/ROSChargeDockDetectionTest.cpp
+  test/ChargeDockDetectionTest.cpp
+  src/ChargeDock.cpp
+  src/ROSChargeDockDetection.cpp
+  src/ChargeDockDetection.cpp
+  src/ROSChargeDock.cpp
   src/Explore.cpp
   src/ROSExplore.cpp
   )
   target_link_libraries(
   ${PROJECT_NAME}_test
   ${catkin_LIBRARIES}
+  ${OpenCV_LIBS}
   )
 add_dependencies(volta ${PROJECT_NAME}_test ${catkin_EXPORTED_TARGETS})
 endif()

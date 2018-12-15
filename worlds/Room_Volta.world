@@ -381,83 +381,44 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose frame=''>-6.4991 -2.53892 0 0 -0 0</pose>
     </model>
-    <model name='my_checkerboard_plane_1'>
-      <link name='link'>
-        <pose frame=''>-0.815073 0.969919 -0 0 -0 0</pose>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <inertial>
-          <mass>1</mass>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://checkerboard_plane/meshes/checkerboard_plane.dae</uri>
-              <scale>0.25 0.25 0.25</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <shader type='pixel'>
-              <normal_map>__default__</normal_map>
-            </shader>
-          </material>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <cast_shadows>1</cast_shadows>
-          <transparency>0</transparency>
-        </visual>
-      </link>
-      <static>1</static>
-      <allow_auto_disable>1</allow_auto_disable>
-      <pose frame=''>-6.93232 -8.35335 0 0 -0 0</pose>
-    </model>
     <state world_name='default'>
-      <sim_time>432 121000000</sim_time>
-      <real_time>434 962279498</real_time>
-      <wall_time>1544745017 23334502</wall_time>
-      <iterations>432121</iterations>
+      <sim_time>677 564000000</sim_time>
+      <real_time>77 19701394</real_time>
+      <wall_time>1544837535 853293051</wall_time>
+      <iterations>76648</iterations>
       <model name='Room'>
-        <pose frame=''>3.86145 -3.77558 0 0 -0 0</pose>
+        <pose frame=''>0.139327 0.076 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='Wall_18'>
-          <pose frame=''>3.86145 -8.70058 0 0 -0 3.14159</pose>
+          <pose frame=''>0.139327 -4.849 0 0 -0 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_19'>
-          <pose frame=''>-1.06354 -3.77558 0 0 -0 1.5708</pose>
+          <pose frame=''>-4.78566 0.076001 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_20'>
-          <pose frame=''>3.86145 1.14942 0 0 -0 0</pose>
+          <pose frame=''>0.139327 5.001 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_21'>
-          <pose frame=''>8.78646 -3.77558 0 0 0 -1.5708</pose>
+          <pose frame=''>5.06434 0.076001 0 0 0 -1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='asphalt_plane'>
-        <pose frame=''>4.25979 -3.65162 0 0 -0 0</pose>
+        <pose frame=''>4.27325 -3.64007 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>4.25979 -3.65162 0 0 -0 0</pose>
+          <pose frame=''>4.27325 -3.64007 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -474,30 +435,20 @@
         </link>
       </model>
       <model name='my_checkerboard_plane'>
-        <pose frame=''>8.70244 -1.84004 1.37721 3.14159 -1.5701 3.14159</pose>
+        <pose frame=''>4.98311 -0.659294 1.37462 3.14159 -1.5701 3.14159</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>8.70301 -0.870121 0.56214 3.14159 -1.5701 3.14159</pose>
+          <pose frame=''>4.98369 0.310625 0.55955 3.14159 -1.5701 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='my_checkerboard_plane_0'>
-        <pose frame=''>-0.971111 -2.53892 -0.297646 0 1.5689 0</pose>
+        <pose frame=''>-4.69543 -1.11369 -0.304721 0 1.5689 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.972659 -1.569 0.517426 0 1.5689 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='my_checkerboard_plane_1'>
-        <pose frame=''>4.4148 -8.62817 1.57707 -1.56655 0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>3.59973 -8.62406 0.60716 -1.56655 0 0</pose>
+          <pose frame=''>-4.69697 -0.143769 0.510351 0 1.5689 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -509,7 +460,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-5.53011 12.8684 14.0336 0 0.485799 -1.25497</pose>
+        <pose frame=''>-0.484057 -6.60356 30.9972 0 1.3258 0.496995</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

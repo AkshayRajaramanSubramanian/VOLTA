@@ -48,10 +48,9 @@
  * @brief Class runs image processing on captured images to detect charging dock
  */
 class ChargeDockDetection {
- private:
-  sensor_msgs::PointCloud2 my_pcl;
-  cv::Point2f center;
  public:
+	sensor_msgs::PointCloud2 my_pcl;
+    cv::Point2f center;
   /**
    * @brief Image processing algorithm to find presence of charging dock
    * @param msg Pointer for image in OpenCV format

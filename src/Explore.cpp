@@ -136,13 +136,13 @@ geometry_msgs::Twist Explore::getLaserData(
   } else {
     crashed = false;
   }
+ if (!explored) {
   if (!crashed) {
     if (rangeMin <= 1 && !thatsADoor) {
       followingWall = true;
       crashed = false;
       // stop the robot before taking a decision to move
       robotMove(STOP);
-
       if (leftSide >= rightSide) {
         // turn the robot to the right
         robotMove(TURN_RIGHT);
@@ -170,10 +170,12 @@ geometry_msgs::Twist Explore::getLaserData(
         // move the robot forward
         robotMove(FORWARD);
       }
+    } else {
+      // move the robot backwards
+      robot_move(BACKWARD);
     }
   } else {
-    // move the robot backwards
-    robotMove(BACKWARD);
+    robot_move(STOP);
   }
   return motorCommand;
 }
@@ -192,4 +194,8 @@ void Explore::getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
   double map_origin_y = mapMsg.info.origin.position.y;
   double map_orientation = acos(mapMsg.info.origin.orientation.z);
   std::vector<signed char> map = mapMsg.data;
+
+  int sumOfElems = 0;
+  for (auto &n : map) sumOfElems += n;
+  if (sumOfElems > -15951242) explored = true;
 }
