@@ -382,43 +382,43 @@
       <pose frame=''>-6.4991 -2.53892 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>677 564000000</sim_time>
-      <real_time>77 19701394</real_time>
-      <wall_time>1544837535 853293051</wall_time>
-      <iterations>76648</iterations>
+      <sim_time>755 875000000</sim_time>
+      <real_time>79 319020871</real_time>
+      <wall_time>1544864759 432902723</wall_time>
+      <iterations>78311</iterations>
       <model name='Room'>
-        <pose frame=''>0.139327 0.076 0 0 -0 0</pose>
+        <pose frame=''>-0.898974 0.076 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='Wall_18'>
-          <pose frame=''>0.139327 -4.849 0 0 -0 3.14159</pose>
+          <pose frame=''>-0.898974 -4.849 0 0 -0 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_19'>
-          <pose frame=''>-4.78566 0.076001 0 0 -0 1.5708</pose>
+          <pose frame=''>-5.82396 0.076001 0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_20'>
-          <pose frame=''>0.139327 5.001 0 0 -0 0</pose>
+          <pose frame=''>-0.898974 5.001 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='Wall_21'>
-          <pose frame=''>5.06434 0.076001 0 0 0 -1.5708</pose>
+          <pose frame=''>4.02604 0.076001 0 0 0 -1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='asphalt_plane'>
-        <pose frame=''>4.27325 -3.64007 0 0 -0 0</pose>
+        <pose frame=''>-0.13153 -0.067701 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>4.27325 -3.64007 0 0 -0 0</pose>
+          <pose frame=''>-0.13153 -0.067701 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -435,20 +435,20 @@
         </link>
       </model>
       <model name='my_checkerboard_plane'>
-        <pose frame=''>4.98311 -0.659294 1.37462 3.14159 -1.5701 3.14159</pose>
+        <pose frame=''>3.9462 -0.659289 1.3739 3.14159 -1.5701 3.14159</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>4.98369 0.310625 0.55955 3.14159 -1.5701 3.14159</pose>
+          <pose frame=''>3.94678 0.31063 0.558828 3.14159 -1.5701 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='my_checkerboard_plane_0'>
-        <pose frame=''>-4.69543 -1.11369 -0.304721 0 1.5689 0</pose>
+        <pose frame=''>-5.74352 -1.11369 -0.306708 0 1.5689 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-4.69697 -0.143769 0.510351 0 1.5689 0</pose>
+          <pose frame=''>-5.74507 -0.143769 0.508364 0 1.5689 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -460,7 +460,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-0.484057 -6.60356 30.9972 0 1.3258 0.496995</pose>
+        <pose frame=''>-6.95503 -1.6332 30.0783 -0 1.4298 1.29699</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
