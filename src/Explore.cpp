@@ -115,7 +115,7 @@ geometry_msgs::Twist Explore::getLaserData(
       rangeMin = laserRanges[i];
     }
 
-    if (std::isnan (laserRanges[i])) {
+    if (std::isnan(laserRanges[i])) {
       nanCount++;
     }
     if (i < rangeSize / 4) {
@@ -136,46 +136,47 @@ geometry_msgs::Twist Explore::getLaserData(
   } else {
     crashed = false;
   }
- if (!explored) {
-  if (!crashed) {
-    if (rangeMin <= 1 && !thatsADoor) {
-      followingWall = true;
-      crashed = false;
-      // stop the robot before taking a decision to move
-      robotMove(STOP);
-      if (leftSide >= rightSide) {
-        // turn the robot to the right
-        robotMove(TURN_RIGHT);
-      } else {
-        // turn the robot to the left
-        robotMove(TURN_LEFT);
-      }
-    } else {
-      robotMove(STOP);
-      if (followingWall) {
-        if (rangeMax >= 1.5) {
-          thatsADoor = true;
-          followingWall = false;
-        }
-      }
-      if (thatsADoor) {
-        if (laserRanges[0] <= 1) {
-          thatsADoor = false;
+  if (!explored) {
+    if (!crashed) {
+      if (rangeMin <= 1 && !thatsADoor) {
+        followingWall = true;
+        crashed = false;
+        // stop the robot before taking a decision to move
+        robotMove(STOP);
+        if (leftSide >= rightSide) {
+          // turn the robot to the right
+          robotMove(TURN_RIGHT);
         } else {
-          // move the robot to the right
-          robotMove(GO_RIGHT);
+          // turn the robot to the left
+          robotMove(TURN_LEFT);
         }
-
       } else {
-        // move the robot forward
-        robotMove(FORWARD);
+        robotMove(STOP);
+        if (followingWall) {
+          if (rangeMax >= 1.5) {
+            thatsADoor = true;
+            followingWall = false;
+          }
+        }
+        if (thatsADoor) {
+          if (laserRanges[0] <= 1) {
+            thatsADoor = false;
+          } else {
+            // move the robot to the right
+            robotMove(GO_RIGHT);
+          }
+
+        } else {
+          // move the robot forward
+          robotMove(FORWARD);
+        }
       }
     } else {
       // move the robot backwards
-      robot_move(BACKWARD);
+      robotMove(BACKWARD);
     }
   } else {
-    robot_move(STOP);
+    robotMove(STOP);
   }
   return motorCommand;
 }
@@ -186,16 +187,16 @@ geometry_msgs::Twist Explore::getLaserData(
  */
 
 void Explore::getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
-  const bool chatty_map = true;
-  mapMsg = *msg;
-  double map_width = mapMsg.info.width;
-  double map_height = mapMsg.info.width;
-  double map_origin_x = mapMsg.info.origin.position.x;
-  double map_origin_y = mapMsg.info.origin.position.y;
-  double map_orientation = acos(mapMsg.info.origin.orientation.z);
-  std::vector<signed char> map = mapMsg.data;
+const bool chatty_map = true;
+mapMsg = *msg;
+double map_width = mapMsg.info.width;
+double map_height = mapMsg.info.width;
+double map_origin_x = mapMsg.info.origin.position.x;
+double map_origin_y = mapMsg.info.origin.position.y;
+double map_orientation = acos(mapMsg.info.origin.orientation.z);
+std::vector<signed char> map = mapMsg.data;
 
-  int sumOfElems = 0;
-  for (auto &n : map) sumOfElems += n;
-  if (sumOfElems > -15951242) explored = true;
+int sumOfElems = 0;
+for (auto &n : map) sumOfElems += n;
+if (sumOfElems > -15951242) explored = true;
 }
