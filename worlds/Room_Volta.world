@@ -114,7 +114,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
+              <name>Gazebo/Bricks</name>
             </script>
             <ambient>1 1 1 1</ambient>
           </material>
@@ -158,7 +158,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
+              <name>Gazebo/Bricks</name>
             </script>
             <ambient>1 1 1 1</ambient>
           </material>
@@ -202,7 +202,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
+              <name>Gazebo/Bricks</name>
             </script>
             <ambient>1 1 1 1</ambient>
           </material>
@@ -246,7 +246,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
+              <name>Gazebo/Bricks</name>
             </script>
             <ambient>1 1 1 1</ambient>
           </material>
@@ -382,10 +382,10 @@
       <pose frame=''>-6.4991 -2.53892 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>755 875000000</sim_time>
-      <real_time>79 319020871</real_time>
-      <wall_time>1544864759 432902723</wall_time>
-      <iterations>78311</iterations>
+      <sim_time>806 899000000</sim_time>
+      <real_time>51 929170240</real_time>
+      <wall_time>1544873041 530193802</wall_time>
+      <iterations>51024</iterations>
       <model name='Room'>
         <pose frame=''>-0.898974 0.076 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -435,10 +435,10 @@
         </link>
       </model>
       <model name='my_checkerboard_plane'>
-        <pose frame=''>3.9462 -0.659289 1.3739 3.14159 -1.5701 3.14159</pose>
+        <pose frame=''>3.94619 -3.65862 1.3739 3.14159 -1.5701 3.14159</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>3.94678 0.31063 0.558828 3.14159 -1.5701 3.14159</pose>
+          <pose frame=''>3.94676 -2.6887 0.558828 3.14159 -1.5701 3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -460,7 +460,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-6.95503 -1.6332 30.0783 -0 1.4298 1.29699</pose>
+        <pose frame=''>-15.2413 -2.76633 15.1228 0 0.897801 -0.379006</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
