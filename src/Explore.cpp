@@ -136,44 +136,48 @@ geometry_msgs::Twist Explore::getLaserData(
   } else {
     crashed = false;
   }
-  if (!crashed) {
-    if (range_min <= 1 && !thats_a_door) {
-      following_wall = true;
-      crashed = false;
-      // stop the robot before taking a decision to move
-      robot_move(STOP);
+  if (!explored) {
+    if (!crashed) {
+      if (range_min <= 1 && !thats_a_door) {
+        following_wall = true;
+        crashed = false;
+        // stop the robot before taking a decision to move
+        robot_move(STOP);
 
-      if (left_side >= right_side) {
-        // turn the robot to the right
-        robot_move(TURN_RIGHT);
+        if (left_side >= right_side) {
+          // turn the robot to the right
+          robot_move(TURN_RIGHT);
+        } else {
+          // turn the robot to the left
+          robot_move(TURN_LEFT);
+        }
       } else {
-        // turn the robot to the left
-        robot_move(TURN_LEFT);
+        robot_move(STOP);
+        if (following_wall) {
+          if (range_max >= 1.5) {
+            thats_a_door = true;
+            following_wall = false;
+          }
+        }
+        if (thats_a_door) {
+          if (laser_ranges[0] <= 1) {
+            thats_a_door = false;
+          } else {
+            // move the robot to the right
+            robot_move(GO_RIGHT);
+          }
+
+        } else {
+          // move the robot forward
+          robot_move(FORWARD);
+        }
       }
     } else {
-      robot_move(STOP);
-      if (following_wall) {
-        if (range_max >= 1.5) {
-          thats_a_door = true;
-          following_wall = false;
-        }
-      }
-      if (thats_a_door) {
-        if (laser_ranges[0] <= 1) {
-          thats_a_door = false;
-        } else {
-          // move the robot to the right
-          robot_move(GO_RIGHT);
-        }
-
-      } else {
-        // move the robot forward
-        robot_move(FORWARD);
-      }
+      // move the robot backwards
+      robot_move(BACKWARD);
     }
   } else {
-    // move the robot backwards
-    robot_move(BACKWARD);
+    robot_move(STOP);
   }
   return motor_command;
 }
@@ -188,8 +192,14 @@ void Explore::getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
   map_msg = *msg;
   double map_width = map_msg.info.width;
   double map_height = map_msg.info.width;
+  ROS_INFO("WIDTH : %d", map_width);
+  ROS_INFO("HEIGHT : %d", map_height);
+  ROS_INFO("*******************");
   double map_origin_x = map_msg.info.origin.position.x;
   double map_origin_y = map_msg.info.origin.position.y;
   double map_orientation = acos(map_msg.info.origin.orientation.z);
   std::vector<signed char> map = map_msg.data;
+  int sum_of_elems = 0;
+  for (auto &n : map) sum_of_elems += n;
+  if (sum_of_elems > -15951242) explored = true;
 }
