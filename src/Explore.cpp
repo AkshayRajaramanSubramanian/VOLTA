@@ -198,5 +198,5 @@ std::vector<signed char> map = mapMsg.data;
 
 int sumOfElems = 0;
 for (auto &n : map) sumOfElems += n;
-if (sumOfElems > -15951242) explored = true;
+if (sumOfElems > -15940000) explored = true;
 }
