@@ -274,8 +274,8 @@ if (CATKIN_ENABLE_TESTING)
   ${PROJECT_NAME}_test
   test/volta_test.test
   test/main.cpp
-  test/voltaTest.cpp
   test/ExploreTest.cpp
+  test/ROSExploreTest.cpp
   src/Explore.cpp
   src/ROSExplore.cpp
   )
