@@ -92,6 +92,7 @@ TEST(rosChargeDockTest, checkMarkerPlacement) {
   p.z = 0;
   points.points.push_back(p);
   rosChargeDock.PublishChargeDock(points);
+  rosChargeDock.placeChargeDock(5.0,0.0,0.0);
   ROSChargeDockTest rosChargeDockTest(n);
   ros::Duration(1.0).sleep();
   ros::spinOnce();
