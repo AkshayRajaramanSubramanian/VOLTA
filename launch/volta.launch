@@ -25,7 +25,7 @@ SOFTWARE.
 
 <launch>
 	<arg name="world" default="Room_Volta"/>
-	<arg name="record" default = "true"/>
+	<arg name="record" default = "false"/>
 	<include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
 		<arg name="world_file" value="$(find volta)/worlds/$(arg world).world"/>
 	</include>
