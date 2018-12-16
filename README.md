@@ -94,9 +94,9 @@ The nodes needed to run this package can be launched by running the following sc
 source <path_to_catkin_workspace>/devel/setup.bash
 roslaunch volta volta.launch
 ```
-The launch file records the data and stores it in the 'bagfiles' directory by default. This can be toggled by setting the record parameter for the rosbag node called from the launch file as follows:
+The launch file records the data and stores it in the 'bagfiles' directory. This action can be trigged by setting the record parameter for the rosbag node called from the launch file as follows:
 ```
-roslaunch volta volta.launch record:='false'
+roslaunch volta volta.launch record:='true'
 ```
 
 ## Tests
