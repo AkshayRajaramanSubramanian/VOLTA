@@ -134,6 +134,7 @@ TEST(inputTest, checkDepthInput) {
 TEST(outputTest, checkConvertedImage) {
   ros::NodeHandle n;
   ROSChargeDockDetectionTest rosChargeDockDetectionTest(n);
+  ROSChargeDockDetection rosChargeDockDetection(n);
   ros::Duration(1.0).sleep();
   ros::spinOnce();
   EXPECT_TRUE(rosChargeDockDetectionTest.isImageConverted);
