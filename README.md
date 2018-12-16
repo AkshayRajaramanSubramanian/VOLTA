@@ -23,10 +23,12 @@ for identification using image processing techniques and will be marked.
 The packages will be developed with Test Driven Development, Pair programming and
 agile development strategies to ensure accurate intended operation of the robot.
 
-## Authors
+## About the Authors
 
-Bala Murali Manoghar Sai Sudhakar
-Akahay Rajaraman
+[Bala Murali Manoghar Sai Sudhakar](https://www.linkedin.com/in/bala-murali-manoghar/) : </br>
+_"I am a student currently pursuing Masters in Robotics at the University of Maryland with a background in mechatronics. I am interested in the Industrial Applications of Robotics"_ </br>
+[Akshay Rajaraman](https://www.linkedin.com/in/akshay-rajaraman/) : </br>
+_"I am a student currently pursuing Masters in Robotics at the University of Maryland. My interests include Motion Planning, Machine Learning and Biomedical Robotics."_
 
 ## License
 
