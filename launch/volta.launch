@@ -32,5 +32,5 @@ SOFTWARE.
 	<node pkg="gmapping" type="slam_gmapping" name="gmapping"/>
 	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find volta)/rviz/rviz_config.rviz"/>	
 	<node pkg="volta" type="volta" name="volta"/>
-	<node pkg="rosbag" type="record" name="rosbag_volta" args="record -o /$(find volta)/bagfiles/myrosbag.bag" if="$(arg record)"/>
+	<node pkg="rosbag" type="record" name="rosbag_volta" args="record -d 20 -o /$(find volta)/bagfiles/myrosbag.bag" if="$(arg record)"/>
 </launch>
