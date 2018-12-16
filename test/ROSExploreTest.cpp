@@ -31,9 +31,6 @@
  * SOFTWARE.
  */
 
-#include <cmath>
-#include <algorithm>
-#include <ros/console.h>
 #include "../include/Explore.h"
 #include "gtest/gtest.h"
 #include "ros/service_client.h"
@@ -97,7 +94,6 @@ TEST(ExploreTest, publishers) {
 TEST(ExploreTest, messageExist) {
   ExploreTest t;
   ROSExplore ex(t.nh);
-  //ex.robot_move(GO_LEFT);
   ros::Duration(2.0).sleep();
   ros::spinOnce();
   ASSERT_TRUE(t.mcallback);

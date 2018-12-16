@@ -81,7 +81,7 @@ class ROSChargeDockDetection {
    * @param nh Node handle
    * @return None
    */
-  ROSChargeDockDetection(ros::NodeHandle _nh);
+  explicit ROSChargeDockDetection(ros::NodeHandle _nh);
   /**
    * @brief Call back function for receiving RGBD image
    * @param Pointer to depth image

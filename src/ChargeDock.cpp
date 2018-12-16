@@ -37,14 +37,12 @@
 #include "visualization_msgs/Marker.h"
 #include "opencv-3.3.1-dev/opencv2/core/core.hpp"
 #include "opencv-3.3.1-dev/opencv2/core/types.hpp"
-#include "visualization_msgs/Marker.h"
 
 ChargeDock::ChargeDock() {
   centers.clear();
 }
 
 bool ChargeDock::ballParkCheck(cv::Point3f point) {
-
   bool inside = false;
   // <! Check if the point received is inside the
   for (auto &i : centers) {
@@ -100,6 +98,5 @@ visualization_msgs::Marker ChargeDock::placeChargeDock(float x, float y,
 }
 
 ChargeDock::~ChargeDock() {
-
 }
 

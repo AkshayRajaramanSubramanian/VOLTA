@@ -33,9 +33,10 @@
 
 #ifndef INCLUDE_ROSEXPLORE_H_
 #define INCLUDE_ROSEXPLORE_H_
-#include "Explore.h"
+
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
+#include "Explore.h"
 
 /**
  * @brief Wrapper node for the Explore class

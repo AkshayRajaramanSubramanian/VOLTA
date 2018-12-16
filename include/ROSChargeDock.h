@@ -55,7 +55,7 @@ class ROSChargeDock {
    * @param None
    * @return None
    */
-  ROSChargeDock(ros::NodeHandle _nh);
+  explicit ROSChargeDock(ros::NodeHandle _nh);
   /**
    * @brief publishes chargedock marker
    * @param marker Data to be published

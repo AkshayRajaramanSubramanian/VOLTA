@@ -31,13 +31,9 @@
  * SOFTWARE.
  */
 
-#include "../include/ROSChargeDockDetection.h"
-#include "../include/ChargeDockDetection.h"
-
 #include <vector>
 #include <string>
 #include <cmath>
-#include "image_transport/image_transport.h"
 #include "cv_bridge/cv_bridge.h"
 #include "tf/transform_broadcaster.h"
 #include "image_transport/image_transport.h"
@@ -48,6 +44,7 @@
 #include "../include/ChargeDockDetection.h"
 #include "../include/ChargeDock.h"
 #include "../include/ROSChargeDock.h"
+#include "../include/ROSChargeDockDetection.h"
 
 ROSChargeDockDetection::ROSChargeDockDetection(ros::NodeHandle _nh)
     : nh(_nh),

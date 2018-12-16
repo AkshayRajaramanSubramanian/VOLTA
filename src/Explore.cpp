@@ -187,16 +187,18 @@ geometry_msgs::Twist Explore::getLaserData(
  */
 
 void Explore::getMapData(const nav_msgs::OccupancyGrid::ConstPtr &msg) {
-const bool chatty_map = true;
-mapMsg = *msg;
-double map_width = mapMsg.info.width;
-double map_height = mapMsg.info.width;
-double map_origin_x = mapMsg.info.origin.position.x;
-double map_origin_y = mapMsg.info.origin.position.y;
-double map_orientation = acos(mapMsg.info.origin.orientation.z);
-std::vector<signed char> map = mapMsg.data;
+  // const bool chattyMap = true;
+  mapMsg = *msg;
+  // double mapWidth = mapMsg.info.width;
+  // double mapHeight = mapMsg.info.width;
+  // double mapOriginX = mapMsg.info.origin.position.x;
+  // double mapOriginY = mapMsg.info.origin.position.y;
+  // double mapOrientation = acos(mapMsg.info.origin.orientation.z);
+  std::vector<signed char> map = mapMsg.data;
 
-int sumOfElems = 0;
-for (auto &n : map) sumOfElems += n;
-if (sumOfElems > -15940000) explored = true;
+  int sumOfElems = 0;
+  for (auto &n : map)
+    sumOfElems += n;
+  if (sumOfElems > -15940000)
+    explored = true;
 }

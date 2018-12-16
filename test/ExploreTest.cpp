@@ -33,7 +33,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <ros/console.h>
 #include "../include/Explore.h"
 #include "gtest/gtest.h"
 #include "ros/service_client.h"
@@ -101,7 +100,6 @@ TEST(robot_move, trun_left) {
  */
 TEST(robot_move, turn_right) {
   // Assert
-  //ros::NodeHandle nh;
   Explore ex;
   // Act
   ex.robotMove(TURN_RIGHT);
