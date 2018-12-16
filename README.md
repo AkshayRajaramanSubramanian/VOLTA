@@ -71,6 +71,14 @@ message_generation </br>
 ## Agile Development Process
 Pair programming is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer or navigator, reviews each line of code as it is typed in. The two programmers switch roles frequently.. You can view the product backlog and development process in this [SPREADSHEET](https://docs.google.com/spreadsheets/d/1tfC8Jz-bgWB9GVRdzZb_OC4-lZSaKUidK2g5616C-TQ/edit#gid=904828225). Check [Sprint Review](https://docs.google.com/document/d/1OSMLGCIpMDP75UOx2Cv_yI2V-nHLj1y-wEeSGF1F2Mw/edit) document for more information on each sprint.
 
+## UML
+<p align="center"> 
+<img src="https://raw.githubusercontent.com/bsaisudh/VOLTA/master/UML/Revised/Class%20Diagram%20VOLTA%20-%20Activity%20Diagram.png">
+</p>
+<p align="center"> 
+<img src="https://raw.githubusercontent.com/bsaisudh/VOLTA/master/UML/Revised/Class%20Diagram%20VOLTA%20-%20Class%20Diagram.png">
+</p>
+
 ## Build
 Run the following scripts in your terminal to build the package
 ```
@@ -85,6 +93,10 @@ The nodes needed to run this package can be launched by running the following sc
 ```
 source <path_to_catkin_workspace>/devel/setup.bash
 roslaunch volta volta.launch
+```
+The launch file records the data and stores it in the 'bagfiles' directory by default. This can be toggled by setting the record parameter for the rosbag node called from the launch file as follows:
+```
+roslaunch volta volta.launch record:='false'
 ```
 
 ## Tests
