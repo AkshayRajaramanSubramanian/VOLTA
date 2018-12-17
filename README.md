@@ -59,6 +59,12 @@ SOFTWARE.
 
 ## Demonstration Video
 The Demonstration Video can be viewed here : [YOUTUBE](https://www.youtube.com/watch?v=8fNom1TxXZ8) </br>
+
+<p align="center"> 
+<a href="http://www.youtube.com/watch?v=8fNom1TxXZ8" target="_blank"><img src="http://img.youtube.com/vi/8fNom1TxXZ8/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+</p>
+
 The presentation can be viewed here : [SLIDES](https://docs.google.com/presentation/d/1h8ZVfWSlU1CukPow7FFdRUYdmrln_SfHpnj592lpWPY/edit?usp=sharing)
 
 
