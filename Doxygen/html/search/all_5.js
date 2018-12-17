@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['placechargedock',['placeChargeDock',['../classChargeDock.html#ac72d7562e67dc771b9de969453b28a5a',1,'ChargeDock::placeChargeDock()'],['../classROSChargeDock.html#ad9c7fe494982f9adffa0d41bc883bb93',1,'ROSChargeDock::placeChargeDock()']]],
-  ['point',['point',['../structpoint.html',1,'']]],
-  ['publishchargedock',['PublishChargeDock',['../classROSChargeDock.html#a0ae979c0ad845073f1a461325b45e302',1,'ROSChargeDock']]]
+  ['followingwall',['followingWall',['../class_explore.html#a3cd00d82f678e73ca1f606767a5c85a0',1,'Explore']]],
+  ['forward',['FORWARD',['../_explore_8h.html#abd005a999dc48e6aab6958bf93058dcdaa26736999186daf8146f809e863712a1',1,'Explore.h']]]
 ];

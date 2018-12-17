@@ -1,4 +1,27 @@
 var searchData=
 [
-  ['depthcallback',['depthcallback',['../classChargeDockDetection.html#ac50426b1798b3dbbfc0aba400680ed0b',1,'ChargeDockDetection::depthcallback()'],['../classROSChargeDockDetection.html#adcc3ee11d1c73f50ef463f35deb29ec6',1,'ROSChargeDockDetection::depthcallback()']]]
+  ['callbackconvertedimage',['callbackConvertedImage',['../class_charge_dock_detection_test.html#a7a66ec216cae9a7783be902ccaa1f356',1,'ChargeDockDetectionTest::callbackConvertedImage()'],['../class_r_o_s_charge_dock_detection_test.html#aca862064ae28a6effaed24cf9f06edca',1,'ROSChargeDockDetectionTest::callbackConvertedImage()']]],
+  ['callbackdepthsub',['callbackDepthSub',['../class_charge_dock_detection_test.html#a2c736098adaa36896eca136d2dc42cd7',1,'ChargeDockDetectionTest::callbackDepthSub()'],['../class_r_o_s_charge_dock_detection_test.html#ae84b15586fad6a09b68ad348b8258cae',1,'ROSChargeDockDetectionTest::callbackDepthSub()']]],
+  ['callbackimagesub',['callbackImageSub',['../class_charge_dock_detection_test.html#a8085af36aa0c5a93f8083a8859c0fbca',1,'ChargeDockDetectionTest::callbackImageSub()'],['../class_r_o_s_charge_dock_detection_test.html#af3dbe9f04a082ff4f6966a34d39338df',1,'ROSChargeDockDetectionTest::callbackImageSub()']]],
+  ['callbackmarkersub',['callbackMarkerSub',['../class_r_o_s_charge_dock_test.html#afa1556a23ee08c97b0026c2783b82ab6',1,'ROSChargeDockTest']]],
+  ['callbackmotorcommand',['callbackMotorCommand',['../class_explore_test.html#abcfe0fb7d6537011070020967626cfcc',1,'ExploreTest']]],
+  ['center',['center',['../class_charge_dock_detection.html#a079c01041db17f8c0c9ca290c89c15e3',1,'ChargeDockDetection::center()'],['../class_r_o_s_charge_dock_detection.html#a8f6f12abd3cdd93de8d0c272b526c662',1,'ROSChargeDockDetection::center()']]],
+  ['centers',['centers',['../class_charge_dock.html#afbe2606b4ae45af791a026157ef75207',1,'ChargeDock']]],
+  ['centroid',['centroid',['../class_charge_dock_detection.html#a5788035f6b303d005a514a0760de3f0e',1,'ChargeDockDetection']]],
+  ['chargedock',['ChargeDock',['../class_charge_dock.html',1,'ChargeDock'],['../class_charge_dock.html#a1118a9e83fc35f8759f835adc2830934',1,'ChargeDock::ChargeDock()']]],
+  ['chargedock_2ecpp',['ChargeDock.cpp',['../_charge_dock_8cpp.html',1,'']]],
+  ['chargedock_2eh',['ChargeDock.h',['../_charge_dock_8h.html',1,'']]],
+  ['chargedockdetection',['ChargeDockDetection',['../class_charge_dock_detection.html',1,'ChargeDockDetection'],['../class_charge_dock_detection.html#ab340306d0a7b9fa08b8a3e50e5aa13a5',1,'ChargeDockDetection::ChargeDockDetection()']]],
+  ['chargedockdetection_2ecpp',['ChargeDockDetection.cpp',['../_charge_dock_detection_8cpp.html',1,'']]],
+  ['chargedockdetection_2eh',['ChargeDockDetection.h',['../_charge_dock_detection_8h.html',1,'']]],
+  ['chargedockdetectiontest',['ChargeDockDetectionTest',['../class_charge_dock_detection_test.html',1,'ChargeDockDetectionTest'],['../class_charge_dock_detection_test.html#a35e51fbf0f32b0a7190d7dd01b580d90',1,'ChargeDockDetectionTest::ChargeDockDetectionTest()']]],
+  ['chargedockdetectiontest_2ecpp',['ChargeDockDetectionTest.cpp',['../_charge_dock_detection_test_8cpp.html',1,'']]],
+  ['chargedockros',['ChargeDockROS',['../class_r_o_s_charge_dock_detection.html#a69ae27a68188fcc656ec74f39aaff8c2',1,'ROSChargeDockDetection']]],
+  ['chargedocktest_2ecpp',['ChargeDockTest.cpp',['../_charge_dock_test_8cpp.html',1,'']]],
+  ['chdockdetect',['ChDockDetect',['../class_r_o_s_charge_dock_detection.html#a3c6b9358bb33eaeb17e05b3293e91d30',1,'ROSChargeDockDetection']]],
+  ['check',['check',['../class_r_o_s_charge_dock_detection.html#ace57849ccec521e1b29e705ab89d3854',1,'ROSChargeDockDetection']]],
+  ['checkerboarddetect',['checkerBoardDetect',['../class_charge_dock_detection.html#a7f05be8102da8a3532c6def0cf39c8ab',1,'ChargeDockDetection']]],
+  ['checkforchargedock',['checkForChargeDock',['../class_charge_dock_detection.html#a7241a471c53bd34fc51216f53eabfbda',1,'ChargeDockDetection::checkForChargeDock()'],['../class_r_o_s_charge_dock_detection.html#ac7a3f2b71a1f0da05f6897dd18fce4d1',1,'ROSChargeDockDetection::checkForChargeDock()']]],
+  ['convertedimage',['convertedImage',['../class_charge_dock_detection_test.html#a6212aaa220836cc571cee8ae07d7fd1b',1,'ChargeDockDetectionTest::convertedImage()'],['../class_r_o_s_charge_dock_detection_test.html#ad66f88ee6506767737293d241b657932',1,'ROSChargeDockDetectionTest::convertedImage()']]],
+  ['crashed',['crashed',['../class_explore.html#ad8b61dc7698a317ba7330baa60f9895f',1,'Explore']]]
 ];

@@ -1,0 +1,4 @@
+<map id="ROSChargeDockDetection" name="ROSChargeDockDetection">
+<area shape="rect" id="node2" href="$class_r_o_s_charge_dock.html" title="Class publishes the marker of charging dock. " alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node3" href="$class_charge_dock_detection.html" title="Class runs image processing on captured images to detect charging dock. " alt="" coords="153,5,304,32"/>
+</map>
