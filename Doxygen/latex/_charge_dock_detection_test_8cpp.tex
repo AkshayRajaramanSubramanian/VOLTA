@@ -1,0 +1,131 @@
+\hypertarget{_charge_dock_detection_test_8cpp}{}\section{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Charge\+Dock\+Detection\+Test.cpp File Reference}
+\label{_charge_dock_detection_test_8cpp}\index{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Charge\+Dock\+Detection\+Test.\+cpp@{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Charge\+Dock\+Detection\+Test.\+cpp}}
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include \char`\"{}../include/\+R\+O\+S\+Charge\+Dock\+Detection.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../include/\+Charge\+Dock\+Detection.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../include/\+Charge\+Dock.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../include/\+R\+O\+S\+Charge\+Dock.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}image\+\_\+transport/image\+\_\+transport.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}cv\+\_\+bridge/cv\+\_\+bridge.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Twist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}tf/transform\+\_\+datatypes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Point\+Cloud2.\+h\char`\"{}}\\*
+Include dependency graph for Charge\+Dock\+Detection\+Test.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_charge_dock_detection_test_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_charge_dock_detection_test}{Charge\+Dock\+Detection\+Test}
+\begin{DoxyCompactList}\small\item\em Test fixture class for level 2 ros test. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_charge_dock_detection_test_8cpp_a3d9a3019b0ca4eb634db09e4895ecb70}{T\+E\+ST} (centroid\+Test, check\+Centroid\+Value)
+\begin{DoxyCompactList}\small\item\em Testing the centroid value of charge dock. \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_aa9bf0e03f4ffe6f5075b497ab0db960b}{T\+E\+ST} (broadcast\+Tflocal\+Test, check\+Local\+Broadcast)
+\begin{DoxyCompactList}\small\item\em testing local broadcast of transform frame with respect to camera link \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_ad5242f08f6f5ff9270edd6ad8e03dbe5}{T\+E\+ST} (broadcast\+Tfodom\+Test, check\+Odom\+Broadcast)
+\begin{DoxyCompactList}\small\item\em testing final broadcast of transform with respect to odom \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_acdc6e2a89e5c4ef19fb0bf3ab0dc7374}{T\+E\+ST} (depthcallback\+Test, check\+True)
+\begin{DoxyCompactList}\small\item\em Checking if callback is properly called for point cloud data. \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_a01d0a90b5f108190762be26ffc56a5da}{T\+E\+ST} (get\+X\+Y\+Z\+Test, check\+True\+Value)
+\begin{DoxyCompactList}\small\item\em testing forward of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_af5614f20da7fda2bb7cf5aa004fcba13}{T\+E\+ST} (get\+Check\+For\+Charge\+Dock\+Test, check\+Cv\+Ptr)
+\begin{DoxyCompactList}\small\item\em testing for image reception in cv pointer \end{DoxyCompactList}\item 
+\hyperlink{_charge_dock_detection_test_8cpp_a77bcf50a7112df4db0d5a37a6e875b15}{T\+E\+ST} (checker\+Board\+Detect\+Test, check\+Image)
+\begin{DoxyCompactList}\small\item\em testing for image size received in topic \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(centroid\+Test, check\+Centroid\+Value)}{TEST(centroidTest, checkCentroidValue)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{centroid\+Test}]{, }
+\item[{check\+Centroid\+Value}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_a3d9a3019b0ca4eb634db09e4895ecb70}{}\label{_charge_dock_detection_test_8cpp_a3d9a3019b0ca4eb634db09e4895ecb70}
+
+
+Testing the centroid value of charge dock. 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(broadcast\+Tflocal\+Test, check\+Local\+Broadcast)}{TEST(broadcastTflocalTest, checkLocalBroadcast)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{broadcast\+Tflocal\+Test}]{, }
+\item[{check\+Local\+Broadcast}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_aa9bf0e03f4ffe6f5075b497ab0db960b}{}\label{_charge_dock_detection_test_8cpp_aa9bf0e03f4ffe6f5075b497ab0db960b}
+
+
+testing local broadcast of transform frame with respect to camera link 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(broadcast\+Tfodom\+Test, check\+Odom\+Broadcast)}{TEST(broadcastTfodomTest, checkOdomBroadcast)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{broadcast\+Tfodom\+Test}]{, }
+\item[{check\+Odom\+Broadcast}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_ad5242f08f6f5ff9270edd6ad8e03dbe5}{}\label{_charge_dock_detection_test_8cpp_ad5242f08f6f5ff9270edd6ad8e03dbe5}
+
+
+testing final broadcast of transform with respect to odom 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(depthcallback\+Test, check\+True)}{TEST(depthcallbackTest, checkTrue)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{depthcallback\+Test}]{, }
+\item[{check\+True}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_acdc6e2a89e5c4ef19fb0bf3ab0dc7374}{}\label{_charge_dock_detection_test_8cpp_acdc6e2a89e5c4ef19fb0bf3ab0dc7374}
+
+
+Checking if callback is properly called for point cloud data. 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(get\+X\+Y\+Z\+Test, check\+True\+Value)}{TEST(getXYZTest, checkTrueValue)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{get\+X\+Y\+Z\+Test}]{, }
+\item[{check\+True\+Value}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_a01d0a90b5f108190762be26ffc56a5da}{}\label{_charge_dock_detection_test_8cpp_a01d0a90b5f108190762be26ffc56a5da}
+
+
+testing forward of robot move function 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(get\+Check\+For\+Charge\+Dock\+Test, check\+Cv\+Ptr)}{TEST(getCheckForChargeDockTest, checkCvPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{get\+Check\+For\+Charge\+Dock\+Test}]{, }
+\item[{check\+Cv\+Ptr}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_af5614f20da7fda2bb7cf5aa004fcba13}{}\label{_charge_dock_detection_test_8cpp_af5614f20da7fda2bb7cf5aa004fcba13}
+
+
+testing for image reception in cv pointer 
+
+\index{Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Charge\+Dock\+Detection\+Test.\+cpp@{Charge\+Dock\+Detection\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(checker\+Board\+Detect\+Test, check\+Image)}{TEST(checkerBoardDetectTest, checkImage)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{checker\+Board\+Detect\+Test}]{, }
+\item[{check\+Image}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_charge_dock_detection_test_8cpp_a77bcf50a7112df4db0d5a37a6e875b15}{}\label{_charge_dock_detection_test_8cpp_a77bcf50a7112df4db0d5a37a6e875b15}
+
+
+testing for image size received in topic 
+

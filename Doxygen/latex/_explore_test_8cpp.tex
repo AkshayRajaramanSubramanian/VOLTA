@@ -1,0 +1,209 @@
+\hypertarget{_explore_test_8cpp}{}\section{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Explore\+Test.cpp File Reference}
+\label{_explore_test_8cpp}\index{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Explore\+Test.\+cpp@{/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\+Explore\+Test.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}../include/\+Explore.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ros/service\+\_\+client.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+srvs/\+Trigger.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Twist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Occupancy\+Grid.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}tf/transform\+\_\+listener.\+h\char`\"{}}\\*
+Include dependency graph for Explore\+Test.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_explore_test_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_explore_test_8cpp_a3e8b801aa8b1cbaa22a3d274e1312d06}{T\+E\+ST} (robot\+\_\+move, stop)
+\begin{DoxyCompactList}\small\item\em testing stop of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a56335f77603bb398ca2fd26aca1a9e6d}{T\+E\+ST} (robot\+\_\+move, forward)
+\begin{DoxyCompactList}\small\item\em testing forward of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_aca892659b6fa4e50ce10d3dd756d7ec1}{T\+E\+ST} (robot\+\_\+move, backward)
+\begin{DoxyCompactList}\small\item\em testing backward movement of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a52b1aff6d614793518fe29af5c3a02c6}{T\+E\+ST} (robot\+\_\+move, trun\+\_\+left)
+\begin{DoxyCompactList}\small\item\em testing turn left of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a77b22187aa1fa8d43299d81dbaa13b77}{T\+E\+ST} (robot\+\_\+move, turn\+\_\+right)
+\begin{DoxyCompactList}\small\item\em testing turn right of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a4e23a7e1122feb07fd2510697e8479d0}{T\+E\+ST} (robot\+\_\+move, go\+\_\+right)
+\begin{DoxyCompactList}\small\item\em testing go right of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a4d802863c9de67dfef259455907f1abe}{T\+E\+ST} (robot\+\_\+move, go\+\_\+left)
+\begin{DoxyCompactList}\small\item\em testing go left of robot move function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a65fe2687b2b6586c926d74c7478f1748}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, backward)
+\begin{DoxyCompactList}\small\item\em testing backward movement of get\+Laser\+Data function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a8549117191cfbc3e358cdecd205f857b}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, forward)
+\begin{DoxyCompactList}\small\item\em testing forward movement of get\+Laser\+Data function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a200b4a35551700600d8b7bacebd6530b}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, turn\+Left)
+\begin{DoxyCompactList}\small\item\em testing turn left movement of get\+Laser\+Data function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_ae45ca2bc088e2f1d21052a6908b75c50}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, turn\+Right)
+\begin{DoxyCompactList}\small\item\em testing turn right movement of get\+Laser\+Data function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_aca47846bd1cb54102e3d83757ec29f34}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, go\+Right)
+\begin{DoxyCompactList}\small\item\em testing go right movement of get\+Laser\+Data function \end{DoxyCompactList}\item 
+\hyperlink{_explore_test_8cpp_a28154c44f5128cec23a5785e30deda5b}{T\+E\+ST} (\hyperlink{class_explore_test}{Explore\+Test}, stop)
+\begin{DoxyCompactList}\small\item\em testing stop function \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, stop)}{TEST(robot_move, stop)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{stop}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a3e8b801aa8b1cbaa22a3d274e1312d06}{}\label{_explore_test_8cpp_a3e8b801aa8b1cbaa22a3d274e1312d06}
+
+
+testing stop of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, forward)}{TEST(robot_move, forward)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{forward}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a56335f77603bb398ca2fd26aca1a9e6d}{}\label{_explore_test_8cpp_a56335f77603bb398ca2fd26aca1a9e6d}
+
+
+testing forward of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, backward)}{TEST(robot_move, backward)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{backward}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_aca892659b6fa4e50ce10d3dd756d7ec1}{}\label{_explore_test_8cpp_aca892659b6fa4e50ce10d3dd756d7ec1}
+
+
+testing backward movement of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, trun\+\_\+left)}{TEST(robot_move, trun_left)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{trun\+\_\+left}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a52b1aff6d614793518fe29af5c3a02c6}{}\label{_explore_test_8cpp_a52b1aff6d614793518fe29af5c3a02c6}
+
+
+testing turn left of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, turn\+\_\+right)}{TEST(robot_move, turn_right)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{turn\+\_\+right}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a77b22187aa1fa8d43299d81dbaa13b77}{}\label{_explore_test_8cpp_a77b22187aa1fa8d43299d81dbaa13b77}
+
+
+testing turn right of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, go\+\_\+right)}{TEST(robot_move, go_right)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{go\+\_\+right}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a4e23a7e1122feb07fd2510697e8479d0}{}\label{_explore_test_8cpp_a4e23a7e1122feb07fd2510697e8479d0}
+
+
+testing go right of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(robot\+\_\+move, go\+\_\+left)}{TEST(robot_move, go_left)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{robot\+\_\+move}]{, }
+\item[{go\+\_\+left}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a4d802863c9de67dfef259455907f1abe}{}\label{_explore_test_8cpp_a4d802863c9de67dfef259455907f1abe}
+
+
+testing go left of robot move function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, backward)}{TEST(ExploreTest, backward)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{backward}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a65fe2687b2b6586c926d74c7478f1748}{}\label{_explore_test_8cpp_a65fe2687b2b6586c926d74c7478f1748}
+
+
+testing backward movement of get\+Laser\+Data function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, forward)}{TEST(ExploreTest, forward)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{forward}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a8549117191cfbc3e358cdecd205f857b}{}\label{_explore_test_8cpp_a8549117191cfbc3e358cdecd205f857b}
+
+
+testing forward movement of get\+Laser\+Data function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, turn\+Left)}{TEST(ExploreTest, turnLeft)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{turn\+Left}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a200b4a35551700600d8b7bacebd6530b}{}\label{_explore_test_8cpp_a200b4a35551700600d8b7bacebd6530b}
+
+
+testing turn left movement of get\+Laser\+Data function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, turn\+Right)}{TEST(ExploreTest, turnRight)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{turn\+Right}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_ae45ca2bc088e2f1d21052a6908b75c50}{}\label{_explore_test_8cpp_ae45ca2bc088e2f1d21052a6908b75c50}
+
+
+testing turn right movement of get\+Laser\+Data function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, go\+Right)}{TEST(ExploreTest, goRight)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{go\+Right}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_aca47846bd1cb54102e3d83757ec29f34}{}\label{_explore_test_8cpp_aca47846bd1cb54102e3d83757ec29f34}
+
+
+testing go right movement of get\+Laser\+Data function 
+
+\index{Explore\+Test.\+cpp@{Explore\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Explore\+Test.\+cpp@{Explore\+Test.\+cpp}}
+\subsubsection[{\texorpdfstring{T\+E\+S\+T(\+Explore\+Test, stop)}{TEST(ExploreTest, stop)}}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Explore\+Test}}]{, }
+\item[{stop}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{_explore_test_8cpp_a28154c44f5128cec23a5785e30deda5b}{}\label{_explore_test_8cpp_a28154c44f5128cec23a5785e30deda5b}
+
+
+testing stop function 
+

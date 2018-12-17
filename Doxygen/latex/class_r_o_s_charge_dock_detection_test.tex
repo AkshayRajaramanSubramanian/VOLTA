@@ -1,0 +1,167 @@
+\hypertarget{class_r_o_s_charge_dock_detection_test}{}\section{R\+O\+S\+Charge\+Dock\+Detection\+Test Class Reference}
+\label{class_r_o_s_charge_dock_detection_test}\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_r_o_s_charge_dock_detection_test_af3dbe9f04a082ff4f6966a34d39338df}{callback\+Image\+Sub} (const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em callback function for image \end{DoxyCompactList}\item 
+void \hyperlink{class_r_o_s_charge_dock_detection_test_ae84b15586fad6a09b68ad348b8258cae}{callback\+Depth\+Sub} (const sensor\+\_\+msgs\+::\+Point\+Cloud2\+Const\+Ptr \&cloud\+Msg)
+\begin{DoxyCompactList}\small\item\em callback function for point cloud data form R\+G\+BD sensor \end{DoxyCompactList}\item 
+void \hyperlink{class_r_o_s_charge_dock_detection_test_aca862064ae28a6effaed24cf9f06edca}{callback\+Converted\+Image} (const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em callback function for image \end{DoxyCompactList}\item 
+\hyperlink{class_r_o_s_charge_dock_detection_test_a559ef16849a7cc15f8c3759142d0162f}{R\+O\+S\+Charge\+Dock\+Detection\+Test} (const ros\+::\+Node\+Handle \&\+\_\+nh)
+\begin{DoxyCompactList}\small\item\em Constructor for the class. \end{DoxyCompactList}\item 
+\hyperlink{class_r_o_s_charge_dock_detection_test_a85c12f8e57a53a86fe000847c3f80def}{$\sim$\+R\+O\+S\+Charge\+Dock\+Detection\+Test} ()
+\begin{DoxyCompactList}\small\item\em destructor for the class \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_r_o_s_charge_dock_detection_test_a297389df72184e25a23c0e2e5b10c651}{is\+Image\+Published}
+\item 
+bool \hyperlink{class_r_o_s_charge_dock_detection_test_aa7342bbccfbc3fa743499ce2734fd5a9}{is\+Depth\+Published}
+\item 
+bool \hyperlink{class_r_o_s_charge_dock_detection_test_a40fd654ca758d257a2ea6832f07fde4c}{is\+Image\+Converted}
+\item 
+ros\+::\+Node\+Handle \hyperlink{class_r_o_s_charge_dock_detection_test_aae8eb6f78005ce4e90bdf6feb027c7b5}{nh}
+\item 
+image\+\_\+transport\+::\+Image\+Transport \hyperlink{class_r_o_s_charge_dock_detection_test_a3ac4e37b78d18b1f8ee54f5eba70b76d}{it}
+\item 
+image\+\_\+transport\+::\+Subscriber \hyperlink{class_r_o_s_charge_dock_detection_test_ac0fb8e740e1e18c85ce4f2cfb375c2d1}{image\+Sub}
+\item 
+ros\+::\+Subscriber \hyperlink{class_r_o_s_charge_dock_detection_test_aaeb8f5a6abcad4620dd4dc36602e0a61}{depth\+Sub}
+\item 
+image\+\_\+transport\+::\+Subscriber \hyperlink{class_r_o_s_charge_dock_detection_test_ad66f88ee6506767737293d241b657932}{converted\+Image}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{R\+O\+S\+Charge\+Dock\+Detection\+Test(const ros\+::\+Node\+Handle \&\+\_\+nh)}{ROSChargeDockDetectionTest(const ros::NodeHandle &_nh)}}]{\setlength{\rightskip}{0pt plus 5cm}R\+O\+S\+Charge\+Dock\+Detection\+Test\+::\+R\+O\+S\+Charge\+Dock\+Detection\+Test (
+\begin{DoxyParamCaption}
+\item[{const ros\+::\+Node\+Handle \&}]{\+\_\+nh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{class_r_o_s_charge_dock_detection_test_a559ef16849a7cc15f8c3759142d0162f}{}\label{class_r_o_s_charge_dock_detection_test_a559ef16849a7cc15f8c3759142d0162f}
+
+
+Constructor for the class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+nh} & Node handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!````~R\+O\+S\+Charge\+Dock\+Detection\+Test@{$\sim$\+R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\index{````~R\+O\+S\+Charge\+Dock\+Detection\+Test@{$\sim$\+R\+O\+S\+Charge\+Dock\+Detection\+Test}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{$\sim$\+R\+O\+S\+Charge\+Dock\+Detection\+Test()}{~ROSChargeDockDetectionTest()}}]{\setlength{\rightskip}{0pt plus 5cm}R\+O\+S\+Charge\+Dock\+Detection\+Test\+::$\sim$\+R\+O\+S\+Charge\+Dock\+Detection\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_r_o_s_charge_dock_detection_test_a85c12f8e57a53a86fe000847c3f80def}{}\label{class_r_o_s_charge_dock_detection_test_a85c12f8e57a53a86fe000847c3f80def}
+
+
+destructor for the class 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!callback\+Converted\+Image@{callback\+Converted\+Image}}
+\index{callback\+Converted\+Image@{callback\+Converted\+Image}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{callback\+Converted\+Image(const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&msg)}{callbackConvertedImage(const sensor_msgs::ImageConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void R\+O\+S\+Charge\+Dock\+Detection\+Test\+::callback\+Converted\+Image (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_r_o_s_charge_dock_detection_test_aca862064ae28a6effaed24cf9f06edca}{}\label{class_r_o_s_charge_dock_detection_test_aca862064ae28a6effaed24cf9f06edca}
+
+
+callback function for image 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & pointer to image data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!callback\+Depth\+Sub@{callback\+Depth\+Sub}}
+\index{callback\+Depth\+Sub@{callback\+Depth\+Sub}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{callback\+Depth\+Sub(const sensor\+\_\+msgs\+::\+Point\+Cloud2\+Const\+Ptr \&cloud\+Msg)}{callbackDepthSub(const sensor_msgs::PointCloud2ConstPtr &cloudMsg)}}]{\setlength{\rightskip}{0pt plus 5cm}void R\+O\+S\+Charge\+Dock\+Detection\+Test\+::callback\+Depth\+Sub (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Point\+Cloud2\+Const\+Ptr \&}]{cloud\+Msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_r_o_s_charge_dock_detection_test_ae84b15586fad6a09b68ad348b8258cae}{}\label{class_r_o_s_charge_dock_detection_test_ae84b15586fad6a09b68ad348b8258cae}
+
+
+callback function for point cloud data form R\+G\+BD sensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cloud\+Msg} & pointer to R\+G\+BD message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!callback\+Image\+Sub@{callback\+Image\+Sub}}
+\index{callback\+Image\+Sub@{callback\+Image\+Sub}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{callback\+Image\+Sub(const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&msg)}{callbackImageSub(const sensor_msgs::ImageConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void R\+O\+S\+Charge\+Dock\+Detection\+Test\+::callback\+Image\+Sub (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Image\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_r_o_s_charge_dock_detection_test_af3dbe9f04a082ff4f6966a34d39338df}{}\label{class_r_o_s_charge_dock_detection_test_af3dbe9f04a082ff4f6966a34d39338df}
+
+
+callback function for image 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & pointer to image data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!converted\+Image@{converted\+Image}}
+\index{converted\+Image@{converted\+Image}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{converted\+Image}{convertedImage}}]{\setlength{\rightskip}{0pt plus 5cm}image\+\_\+transport\+::\+Subscriber R\+O\+S\+Charge\+Dock\+Detection\+Test\+::converted\+Image}\hypertarget{class_r_o_s_charge_dock_detection_test_ad66f88ee6506767737293d241b657932}{}\label{class_r_o_s_charge_dock_detection_test_ad66f88ee6506767737293d241b657932}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!depth\+Sub@{depth\+Sub}}
+\index{depth\+Sub@{depth\+Sub}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{depth\+Sub}{depthSub}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber R\+O\+S\+Charge\+Dock\+Detection\+Test\+::depth\+Sub}\hypertarget{class_r_o_s_charge_dock_detection_test_aaeb8f5a6abcad4620dd4dc36602e0a61}{}\label{class_r_o_s_charge_dock_detection_test_aaeb8f5a6abcad4620dd4dc36602e0a61}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!image\+Sub@{image\+Sub}}
+\index{image\+Sub@{image\+Sub}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{image\+Sub}{imageSub}}]{\setlength{\rightskip}{0pt plus 5cm}image\+\_\+transport\+::\+Subscriber R\+O\+S\+Charge\+Dock\+Detection\+Test\+::image\+Sub}\hypertarget{class_r_o_s_charge_dock_detection_test_ac0fb8e740e1e18c85ce4f2cfb375c2d1}{}\label{class_r_o_s_charge_dock_detection_test_ac0fb8e740e1e18c85ce4f2cfb375c2d1}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!is\+Depth\+Published@{is\+Depth\+Published}}
+\index{is\+Depth\+Published@{is\+Depth\+Published}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{is\+Depth\+Published}{isDepthPublished}}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+O\+S\+Charge\+Dock\+Detection\+Test\+::is\+Depth\+Published}\hypertarget{class_r_o_s_charge_dock_detection_test_aa7342bbccfbc3fa743499ce2734fd5a9}{}\label{class_r_o_s_charge_dock_detection_test_aa7342bbccfbc3fa743499ce2734fd5a9}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!is\+Image\+Converted@{is\+Image\+Converted}}
+\index{is\+Image\+Converted@{is\+Image\+Converted}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{is\+Image\+Converted}{isImageConverted}}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+O\+S\+Charge\+Dock\+Detection\+Test\+::is\+Image\+Converted}\hypertarget{class_r_o_s_charge_dock_detection_test_a40fd654ca758d257a2ea6832f07fde4c}{}\label{class_r_o_s_charge_dock_detection_test_a40fd654ca758d257a2ea6832f07fde4c}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!is\+Image\+Published@{is\+Image\+Published}}
+\index{is\+Image\+Published@{is\+Image\+Published}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{is\+Image\+Published}{isImagePublished}}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+O\+S\+Charge\+Dock\+Detection\+Test\+::is\+Image\+Published}\hypertarget{class_r_o_s_charge_dock_detection_test_a297389df72184e25a23c0e2e5b10c651}{}\label{class_r_o_s_charge_dock_detection_test_a297389df72184e25a23c0e2e5b10c651}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!it@{it}}
+\index{it@{it}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{it}{it}}]{\setlength{\rightskip}{0pt plus 5cm}image\+\_\+transport\+::\+Image\+Transport R\+O\+S\+Charge\+Dock\+Detection\+Test\+::it}\hypertarget{class_r_o_s_charge_dock_detection_test_a3ac4e37b78d18b1f8ee54f5eba70b76d}{}\label{class_r_o_s_charge_dock_detection_test_a3ac4e37b78d18b1f8ee54f5eba70b76d}
+\index{R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}!nh@{nh}}
+\index{nh@{nh}!R\+O\+S\+Charge\+Dock\+Detection\+Test@{R\+O\+S\+Charge\+Dock\+Detection\+Test}}
+\subsubsection[{\texorpdfstring{nh}{nh}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle R\+O\+S\+Charge\+Dock\+Detection\+Test\+::nh}\hypertarget{class_r_o_s_charge_dock_detection_test_aae8eb6f78005ce4e90bdf6feb027c7b5}{}\label{class_r_o_s_charge_dock_detection_test_aae8eb6f78005ce4e90bdf6feb027c7b5}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/bala/workspace/\+R\+O\+S/hello-\/terp-\/ws/src/\+V\+O\+L\+T\+A/test/\hyperlink{_r_o_s_charge_dock_detection_test_8cpp}{R\+O\+S\+Charge\+Dock\+Detection\+Test.\+cpp}\end{DoxyCompactItemize}
